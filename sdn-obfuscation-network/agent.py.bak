@@ -1,0 +1,80 @@
+import etcd3
+import json
+import subprocess
+import time
+import socket
+
+def get_host_ip():
+    """
+    通过巧妙地建立一个 UDP 伪连接来获取本机真实的对外内网 IP。
+    这种方法不需要真实发包，且比解析网卡信息更稳定跨平台。
+    """
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(('8.8.8.8', 80))
+        ip = s.getsockname()[0]
+    finally:
+        s.close()
+    return ip
+
+# 动态获取本机 IP 作为节点唯一标识
+MY_IP = get_host_ip()
+MY_RULE_DIR = f"/network/rules/{MY_IP}/"
+
+print(f"[*] 检测到本机真实节点 IP: {MY_IP}")
+# 假设本机是 SOR 节点 A，IP 为 192.168.1.10
+# MY_IP = "192.168.1.10"
+# 监听的 etcd 目录路径
+# MY_RULE_DIR = f"/network/rules/{MY_IP}/"
+
+# 存放拉起的 tinyportmapper 进程字典 (对应你论文里的快表)
+active_tunnels = {}
+
+def start_sor_agent():
+    # 1. 连接到本地或远端的 etcd
+    client = etcd3.client(host='127.0.0.1', port=2379)
+    print(f"[*] SOR 节点 {MY_IP} 启动，已连接 etcd，等待大脑下发流表...")
+
+    # 2. 监听属于自己的规则目录
+    events_iterator, cancel = client.watch_prefix(MY_RULE_DIR)
+
+    for event in events_iterator:
+        # 解析 etcd 事件
+        event_type = type(event).__name__
+        key = event.key.decode('utf-8')
+        
+        if event_type == 'PutEvent':
+            # 大脑下发了新规则！
+            val = json.loads(event.value.decode('utf-8'))
+            tid = val.get("tunnel_id")
+            lp = val.get("lp")
+            rip = val.get("rip")
+            rp = val.get("rp")
+            
+            print(f"\n[+] 收到新规则！准备建立隧道 {tid}: 本地端口 {lp} -> 目标 {rip}:{rp}")
+            
+            # 动态拉起 tinyportmapper (使用 -u 开启 UDP 转发)
+            cmd = ["./tinymapper", "-l", f"0.0.0.0:{lp}", "-r", f"{rip}:{rp}", "-u"]
+            proc = subprocess.Popen(cmd)
+            
+            # 记录进程句柄
+            active_tunnels[tid] = proc
+            print(f"[+] 隧道 {tid} 极速盲接成功！PID: {proc.pid}")
+
+        elif event_type == 'DeleteEvent':
+            # 大脑删除了规则（可能是重路由或者业务结束）
+            # 从 key 中提取 tunnel_id，例如 key 是 /network/rules/192.168.1.10/tunnel_1024
+            tid_str = key.split('_')[-1]
+            if tid_str.isdigit():
+                tid = int(tid_str)
+                if tid in active_tunnels:
+                    print(f"\n[-] 收到销毁指令！正在拆除隧道 {tid}...")
+                    active_tunnels[tid].terminate()
+                    del active_tunnels[tid]
+                    print(f"[-] 隧道 {tid} 已安全拆除。")
+
+if __name__ == '__main__':
+    try:
+        start_sor_agent()
+    except KeyboardInterrupt:
+        print("Agent 退出。")

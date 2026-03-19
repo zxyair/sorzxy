@@ -1,0 +1,566 @@
+2026-03-19 17:31:59,106 INFO sim.main =====================================================
+2026-03-19 17:31:59,106 INFO sim.main 🧪 E2E Simulation: DS + SAR + simulated SOR cluster
+2026-03-19 17:31:59,106 INFO sim.main =====================================================
+2026-03-19 17:31:59,106 INFO sim.main [cfg] etcd=http://127.0.0.1:2379  ds=127.0.0.1:50052  sar=8.8.8.8:53
+2026-03-19 17:31:59,106 INFO sim.main [cfg] sors=12  requests=3  req_bw=5
+2026-03-19 17:31:59,106 INFO sim.main [cfg] logs=/home/ubuntu/sorzxy/sdn-obfuscation-network/.smoke (ds.log/sar.log/sor.log/smr.log/sim.log)
+2026-03-19 17:31:59,106 INFO sim.main [step] clearing /network/ prefix
+2026-03-19 17:31:59,131 INFO sim.main [step] starting DS
+2026-03-19 17:31:59,134 INFO sim.main [step] starting SAR register
+2026-03-19 17:31:59,666 INFO sim.main [step] spawning simulated SOR nodes
+2026-03-19 17:32:02,076 INFO sim.main [step] waiting for at least one link to SAR target
+2026-03-19 17:32:04,081 INFO sim.main [step] issuing SMR RequestTunnel calls
+2026-03-19 17:32:04,087 INFO sim.main [req 00] tunnel=24083 first=10.0.0.106:35702 hops=1 path=10.0.0.106 -> 8.8.8.8
+2026-03-19 17:32:04,692 INFO sim.main [req 01] tunnel=24689 first=10.0.0.105:55100 hops=1 path=10.0.0.105 -> 8.8.8.8
+2026-03-19 17:32:05,301 INFO sim.main [req 02] tunnel=25295 first=10.0.0.108:10890 hops=3 path=10.0.0.108 -> 10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:32:05,902 INFO sim.main -----------------------------------------------------
+2026-03-19 17:32:05,902 INFO sim.main [summary] hop histogram (edges):
+2026-03-19 17:32:05,902 INFO sim.main   hops=1: 2
+2026-03-19 17:32:05,902 INFO sim.main   hops=3: 1
+2026-03-19 17:32:05,902 INFO sim.main [summary] unique paths: 3  failures/rejects: 0
+2026-03-19 17:32:05,902 INFO sim.main [summary] top paths:
+2026-03-19 17:32:05,902 INFO sim.main   x1: 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:32:05,902 INFO sim.main   x1: 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:32:05,902 INFO sim.main   x1: 10.0.0.108 -> 10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:35:31,874 INFO sim.main =====================================================
+2026-03-19 17:35:31,875 INFO sim.main 🧪 E2E Simulation: DS + SAR + simulated SOR cluster
+2026-03-19 17:35:31,875 INFO sim.main =====================================================
+2026-03-19 17:35:31,875 INFO sim.main [cfg] etcd=http://127.0.0.1:2379  ds=127.0.0.1:50052  sar=8.8.8.8:53
+2026-03-19 17:35:31,875 INFO sim.main [cfg] sors=12  requests=20  req_bw=5
+2026-03-19 17:35:31,875 INFO sim.main [cfg] logs=/home/ubuntu/sorzxy/sdn-obfuscation-network/.smoke (ds.log/sar.log/sor.log/smr.log/sim.log)
+2026-03-19 17:35:31,875 INFO sim.main [step] clearing /network/ prefix
+2026-03-19 17:35:31,900 INFO sim.main [step] starting DS
+2026-03-19 17:35:31,903 INFO sim.main [step] starting SAR register
+2026-03-19 17:35:32,443 INFO sim.main [step] spawning simulated SOR nodes
+2026-03-19 17:35:34,852 INFO sim.main [step] waiting for at least one link to SAR target
+2026-03-19 17:35:36,855 INFO sim.main [step] issuing SMR RequestTunnel calls
+2026-03-19 17:35:36,861 INFO sim.main [req 00] tunnel=36857 first=10.0.0.107:38172 hops=1 path=10.0.0.107 -> 8.8.8.8
+2026-03-19 17:35:37,471 INFO sim.main [req 01] tunnel=37464 first=10.0.0.111:34316 hops=4 path=10.0.0.111 -> 10.0.0.110 -> 10.0.0.108 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:35:38,081 INFO sim.main [req 02] tunnel=38073 first=172.16.0.11:13620 hops=1 path=172.16.0.11 -> 8.8.8.8
+2026-03-19 17:35:38,692 INFO sim.main [req 03] tunnel=38684 first=10.0.0.102:14473 hops=5 path=10.0.0.102 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.111 -> 10.0.0.109 -> 8.8.8.8
+2026-03-19 17:35:39,319 INFO sim.main [req 04] tunnel=39308 first=10.0.0.111:43822 hops=5 path=10.0.0.111 -> 10.0.0.107 -> 10.0.0.105 -> 10.0.0.101 -> 10.0.0.109 -> 8.8.8.8
+2026-03-19 17:35:39,944 INFO sim.main [req 05] tunnel=39934 first=10.0.0.112:43102 hops=3 path=10.0.0.112 -> 10.0.0.111 -> 10.0.0.109 -> 8.8.8.8
+2026-03-19 17:35:40,556 INFO sim.main [req 06] tunnel=40548 first=10.0.0.102:13350 hops=4 path=10.0.0.102 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:35:41,180 INFO sim.main [req 07] tunnel=41171 first=10.0.0.106:33021 hops=5 path=10.0.0.106 -> 10.0.0.104 -> 10.0.0.103 -> 10.0.0.101 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 17:35:41,800 INFO sim.main [req 08] tunnel=41785 first=10.0.0.102:38333 hops=5 path=10.0.0.102 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.107 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:35:42,407 INFO sim.main [req 09] tunnel=42402 first=172.16.0.11:29130 hops=1 path=172.16.0.11 -> 8.8.8.8
+2026-03-19 17:35:43,023 INFO sim.main [req 10] tunnel=43014 first=10.0.0.107:37231 hops=5 path=10.0.0.107 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.109 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:35:43,643 INFO sim.main [req 11] tunnel=43635 first=10.0.0.109:10710 hops=4 path=10.0.0.109 -> 10.0.0.108 -> 10.0.0.106 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:35:44,259 INFO sim.main [req 12] tunnel=44252 first=10.0.0.108:23892 hops=4 path=10.0.0.108 -> 10.0.0.106 -> 10.0.0.105 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:35:44,872 INFO sim.main [req 13] tunnel=44863 first=10.0.0.103:52586 hops=5 path=10.0.0.103 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:35:45,478 INFO sim.main [req 14] tunnel=45474 first=172.16.0.11:22042 hops=1 path=172.16.0.11 -> 8.8.8.8
+2026-03-19 17:35:46,099 INFO sim.main [req 15] tunnel=46085 first=10.0.0.101:54343 hops=5 path=10.0.0.101 -> 10.0.0.109 -> 10.0.0.108 -> 10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:35:46,723 INFO sim.main [req 16] tunnel=46714 first=10.0.0.110:46275 hops=5 path=10.0.0.110 -> 10.0.0.106 -> 10.0.0.101 -> 10.0.0.105 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:35:47,337 INFO sim.main [req 17] tunnel=47329 first=10.0.0.105:39818 hops=4 path=10.0.0.105 -> 10.0.0.101 -> 10.0.0.106 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:35:47,957 INFO sim.main [req 18] tunnel=47948 first=10.0.0.107:33778 hops=5 path=10.0.0.107 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.109 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:35:48,581 INFO sim.main [req 19] tunnel=48572 first=10.0.0.111:14761 hops=5 path=10.0.0.111 -> 10.0.0.106 -> 10.0.0.105 -> 10.0.0.103 -> 10.0.0.101 -> 8.8.8.8
+2026-03-19 17:35:49,182 INFO sim.main -----------------------------------------------------
+2026-03-19 17:35:49,182 INFO sim.main [summary] hop histogram (edges):
+2026-03-19 17:35:49,182 INFO sim.main   hops=1: 4
+2026-03-19 17:35:49,182 INFO sim.main   hops=3: 1
+2026-03-19 17:35:49,182 INFO sim.main   hops=4: 5
+2026-03-19 17:35:49,182 INFO sim.main   hops=5: 10
+2026-03-19 17:35:49,182 INFO sim.main [summary] unique paths: 18  failures/rejects: 0
+2026-03-19 17:35:49,182 INFO sim.main [summary] top paths:
+2026-03-19 17:35:49,182 INFO sim.main   x3: 172.16.0.11 -> 8.8.8.8
+2026-03-19 17:35:49,182 INFO sim.main   x1: 10.0.0.107 -> 8.8.8.8
+2026-03-19 17:35:49,182 INFO sim.main   x1: 10.0.0.111 -> 10.0.0.110 -> 10.0.0.108 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:35:49,182 INFO sim.main   x1: 10.0.0.102 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.111 -> 10.0.0.109 -> 8.8.8.8
+2026-03-19 17:35:49,182 INFO sim.main   x1: 10.0.0.111 -> 10.0.0.107 -> 10.0.0.105 -> 10.0.0.101 -> 10.0.0.109 -> 8.8.8.8
+2026-03-19 17:35:49,182 INFO sim.main   x1: 10.0.0.112 -> 10.0.0.111 -> 10.0.0.109 -> 8.8.8.8
+2026-03-19 17:35:49,182 INFO sim.main   x1: 10.0.0.102 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:35:49,182 INFO sim.main   x1: 10.0.0.106 -> 10.0.0.104 -> 10.0.0.103 -> 10.0.0.101 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 17:35:49,182 INFO sim.main   x1: 10.0.0.102 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.107 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:35:49,182 INFO sim.main   x1: 10.0.0.107 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.109 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:38:57,955 INFO sim.main =====================================================
+2026-03-19 17:38:57,955 INFO sim.main 🧪 E2E Simulation: DS + SAR + simulated SOR cluster
+2026-03-19 17:38:57,955 INFO sim.main =====================================================
+2026-03-19 17:38:57,955 INFO sim.main [cfg] etcd=http://127.0.0.1:2379  ds=127.0.0.1:50052  sar=8.8.8.8:53
+2026-03-19 17:38:57,955 INFO sim.main [cfg] sors=12  requests=2  req_bw=5
+2026-03-19 17:38:57,955 INFO sim.main [cfg] logs=/home/ubuntu/sorzxy/sdn-obfuscation-network/.smoke (ds.log/sar.log/sor.log/smr.log/sim.log)
+2026-03-19 17:38:57,955 INFO sim.main [step] clearing /network/ prefix
+2026-03-19 17:38:57,977 INFO sim.main [step] starting DS
+2026-03-19 17:38:57,986 INFO sim.main [step] starting SAR register
+2026-03-19 17:38:58,514 INFO sim.main [step] spawning simulated SOR nodes
+2026-03-19 17:39:00,922 INFO sim.main [step] waiting for at least one link to SAR target
+2026-03-19 17:39:02,926 INFO sim.main [step] issuing SMR RequestTunnel calls
+2026-03-19 17:39:02,931 INFO sim.main [req 00] tunnel=42928 first=10.0.0.105:54841 hops=1 path=10.0.0.105 -> 8.8.8.8
+2026-03-19 17:39:03,537 INFO sim.main [req 01] tunnel=43533 first=10.0.0.105:26481 hops=1 path=10.0.0.105 -> 8.8.8.8
+2026-03-19 17:39:04,138 INFO sim.main -----------------------------------------------------
+2026-03-19 17:39:04,138 INFO sim.main [summary] hop histogram (edges):
+2026-03-19 17:39:04,138 INFO sim.main   hops=1: 2
+2026-03-19 17:39:04,138 INFO sim.main [summary] unique paths: 1  failures/rejects: 0
+2026-03-19 17:39:04,138 INFO sim.main [summary] top paths:
+2026-03-19 17:39:04,138 INFO sim.main   x2: 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:39:26,848 INFO sim.main =====================================================
+2026-03-19 17:39:26,848 INFO sim.main 🧪 E2E Simulation: DS + SAR + simulated SOR cluster
+2026-03-19 17:39:26,848 INFO sim.main =====================================================
+2026-03-19 17:39:26,848 INFO sim.main [cfg] etcd=http://127.0.0.1:2379  ds=127.0.0.1:50052  sar=8.8.8.8:53
+2026-03-19 17:39:26,848 INFO sim.main [cfg] sors=12  requests=1  req_bw=5
+2026-03-19 17:39:26,848 INFO sim.main [cfg] logs=/home/ubuntu/sorzxy/sdn-obfuscation-network/.smoke (ds.log/sar.log/sor.log/smr.log/sim.log)
+2026-03-19 17:39:26,848 INFO sim.main [step] clearing /network/ prefix
+2026-03-19 17:39:26,870 INFO sim.main [step] starting DS
+2026-03-19 17:39:26,873 INFO sim.main [step] starting SAR register
+2026-03-19 17:39:27,415 INFO sim.main [step] spawning simulated SOR nodes
+2026-03-19 17:39:29,823 INFO sim.main [step] waiting for at least one link to SAR target
+2026-03-19 17:39:31,826 INFO sim.main [step] issuing SMR RequestTunnel calls
+2026-03-19 17:39:31,836 INFO sim.main [req 00] tunnel=71829 first=10.0.0.108:36046 hops=3 path=10.0.0.108 -> 10.0.0.107 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:39:32,437 INFO sim.main -----------------------------------------------------
+2026-03-19 17:39:32,437 INFO sim.main [summary] hop histogram (edges):
+2026-03-19 17:39:32,437 INFO sim.main   hops=3: 1
+2026-03-19 17:39:32,437 INFO sim.main [summary] unique paths: 1  failures/rejects: 0
+2026-03-19 17:39:32,437 INFO sim.main [summary] top paths:
+2026-03-19 17:39:32,437 INFO sim.main   x1: 10.0.0.108 -> 10.0.0.107 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:40:00,117 INFO sim.main =====================================================
+2026-03-19 17:40:00,117 INFO sim.main 🧪 E2E Simulation: DS + SAR + simulated SOR cluster
+2026-03-19 17:40:00,117 INFO sim.main =====================================================
+2026-03-19 17:40:00,117 INFO sim.main [cfg] etcd=http://127.0.0.1:2379  ds=127.0.0.1:50052  sar=8.8.8.8:53
+2026-03-19 17:40:00,117 INFO sim.main [cfg] sors=12  requests=1  req_bw=5
+2026-03-19 17:40:00,117 INFO sim.main [cfg] logs=/home/ubuntu/sorzxy/sdn-obfuscation-network/.smoke (ds.log/sar.log/sor.log/smr.log/sim.log)
+2026-03-19 17:40:00,117 INFO sim.main [step] clearing /network/ prefix
+2026-03-19 17:40:00,139 INFO sim.main [step] starting DS
+2026-03-19 17:40:00,142 INFO sim.main [step] starting SAR register
+2026-03-19 17:40:00,682 INFO sim.main [step] spawning simulated SOR nodes
+2026-03-19 17:40:03,091 INFO sim.main [step] waiting for at least one link to SAR target
+2026-03-19 17:40:03,093 INFO sim.main [step] issuing SMR RequestTunnel calls
+2026-03-19 17:40:03,100 INFO sim.main [req 00] tunnel=3096 first=172.16.0.11:48174 hops=1 path=172.16.0.11 -> 8.8.8.8
+2026-03-19 17:40:03,700 INFO sim.main -----------------------------------------------------
+2026-03-19 17:40:03,701 INFO sim.main [summary] hop histogram (edges):
+2026-03-19 17:40:03,701 INFO sim.main   hops=1: 1
+2026-03-19 17:40:03,701 INFO sim.main [summary] unique paths: 1  failures/rejects: 0
+2026-03-19 17:40:03,701 INFO sim.main [summary] top paths:
+2026-03-19 17:40:03,701 INFO sim.main   x1: 172.16.0.11 -> 8.8.8.8
+2026-03-19 17:40:48,086 INFO sim.main =====================================================
+2026-03-19 17:40:48,091 INFO sim.main 🧪 E2E Simulation: DS + SAR + simulated SOR cluster
+2026-03-19 17:40:48,091 INFO sim.main =====================================================
+2026-03-19 17:40:48,091 INFO sim.main [cfg] etcd=http://127.0.0.1:2379  ds=127.0.0.1:50052  sar=8.8.8.8:53
+2026-03-19 17:40:48,091 INFO sim.main [cfg] sors=12  requests=20  req_bw=5
+2026-03-19 17:40:48,091 INFO sim.main [cfg] logs=/home/ubuntu/sorzxy/sdn-obfuscation-network/.smoke (ds.log/sar.log/sor.log/smr.log/sim.log)
+2026-03-19 17:40:48,091 INFO sim.main [step] clearing /network/ prefix
+2026-03-19 17:40:48,143 INFO sim.main [step] starting DS
+2026-03-19 17:40:48,152 INFO sim.main [step] starting SAR register
+2026-03-19 17:40:48,694 INFO sim.main [step] spawning simulated SOR nodes
+2026-03-19 17:40:51,104 INFO sim.main [step] waiting for at least one link to SAR target
+2026-03-19 17:40:52,106 INFO sim.main [step] issuing SMR RequestTunnel calls
+2026-03-19 17:40:52,109 INFO sim.main [req 00] reject: NO_FEASIBLE_PATH | 无合规路径（可能由loss/jitter/delay/bw/hops任一约束触发） | top_rejects(delay=0, jitter=0, loss=0) | constraints(max_loss_rate=0.2, max_jitter_ms=120.0, max_delay_ms=600.0, min_bw_mbps=5.0, min_hops=2, max_hops=6)
+2026-03-19 17:40:52,714 INFO sim.main [req 01] tunnel=52710 first=10.0.0.101:44382 hops=1 path=10.0.0.101 -> 8.8.8.8
+2026-03-19 17:40:53,325 INFO sim.main [req 02] tunnel=53317 first=10.0.0.109:53127 hops=5 path=10.0.0.109 -> 10.0.0.108 -> 10.0.0.105 -> 10.0.0.103 -> 10.0.0.101 -> 8.8.8.8
+2026-03-19 17:40:53,933 INFO sim.main [req 03] tunnel=53927 first=10.0.0.104:12078 hops=3 path=10.0.0.104 -> 10.0.0.103 -> 10.0.0.101 -> 8.8.8.8
+2026-03-19 17:40:54,546 INFO sim.main [req 04] tunnel=54537 first=10.0.0.111:39071 hops=5 path=10.0.0.111 -> 10.0.0.110 -> 10.0.0.103 -> 10.0.0.102 -> 10.0.0.101 -> 8.8.8.8
+2026-03-19 17:40:55,157 INFO sim.main [req 05] tunnel=55151 first=10.0.0.106:10458 hops=2 path=10.0.0.106 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:40:55,776 INFO sim.main [req 06] tunnel=55766 first=10.0.0.101:53531 hops=5 path=10.0.0.101 -> 10.0.0.110 -> 10.0.0.109 -> 10.0.0.106 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:40:56,393 INFO sim.main [req 07] tunnel=56384 first=10.0.0.107:45316 hops=4 path=10.0.0.107 -> 10.0.0.105 -> 10.0.0.101 -> 10.0.0.112 -> 8.8.8.8
+2026-03-19 17:40:57,006 INFO sim.main [req 08] tunnel=56998 first=10.0.0.103:46154 hops=5 path=10.0.0.103 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.108 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 17:40:57,625 INFO sim.main [req 09] tunnel=57617 first=10.0.0.109:21962 hops=4 path=10.0.0.109 -> 10.0.0.101 -> 10.0.0.105 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:40:58,246 INFO sim.main [req 10] tunnel=58237 first=10.0.0.110:31690 hops=5 path=10.0.0.110 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.106 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:40:58,861 INFO sim.main [req 11] tunnel=58851 first=10.0.0.104:56330 hops=5 path=10.0.0.104 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.107 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:40:59,487 INFO sim.main [req 12] tunnel=59478 first=10.0.0.112:36047 hops=5 path=10.0.0.112 -> 10.0.0.111 -> 10.0.0.104 -> 10.0.0.101 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:41:00,098 INFO sim.main [req 13] tunnel=60091 first=10.0.0.102:32427 hops=4 path=10.0.0.102 -> 10.0.0.101 -> 10.0.0.107 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:41:00,705 INFO sim.main [req 14] tunnel=60701 first=172.16.0.11:31116 hops=1 path=172.16.0.11 -> 8.8.8.8
+2026-03-19 17:41:01,326 INFO sim.main [req 15] tunnel=61317 first=10.0.0.109:40675 hops=3 path=10.0.0.109 -> 10.0.0.104 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:41:01,942 INFO sim.main [req 16] tunnel=61929 first=10.0.0.102:33255 hops=4 path=10.0.0.102 -> 10.0.0.101 -> 10.0.0.111 -> 10.0.0.109 -> 8.8.8.8
+2026-03-19 17:41:02,559 INFO sim.main [req 17] tunnel=62549 first=10.0.0.107:21156 hops=5 path=10.0.0.107 -> 10.0.0.103 -> 10.0.0.101 -> 10.0.0.109 -> 10.0.0.108 -> 8.8.8.8
+2026-03-19 17:41:03,172 INFO sim.main [req 18] tunnel=63163 first=10.0.0.103:20447 hops=5 path=10.0.0.103 -> 10.0.0.101 -> 10.0.0.109 -> 10.0.0.108 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:41:03,793 INFO sim.main [req 19] tunnel=63783 first=10.0.0.106:52898 hops=5 path=10.0.0.106 -> 10.0.0.105 -> 10.0.0.101 -> 10.0.0.111 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:41:04,394 INFO sim.main -----------------------------------------------------
+2026-03-19 17:41:04,394 INFO sim.main [summary] hop histogram (edges):
+2026-03-19 17:41:04,394 INFO sim.main   hops=1: 2
+2026-03-19 17:41:04,394 INFO sim.main   hops=2: 1
+2026-03-19 17:41:04,394 INFO sim.main   hops=3: 2
+2026-03-19 17:41:04,394 INFO sim.main   hops=4: 4
+2026-03-19 17:41:04,394 INFO sim.main   hops=5: 10
+2026-03-19 17:41:04,394 INFO sim.main [summary] unique paths: 19  failures/rejects: 1
+2026-03-19 17:41:04,394 INFO sim.main [summary] top paths:
+2026-03-19 17:41:04,394 INFO sim.main   x1: 10.0.0.101 -> 8.8.8.8
+2026-03-19 17:41:04,394 INFO sim.main   x1: 10.0.0.109 -> 10.0.0.108 -> 10.0.0.105 -> 10.0.0.103 -> 10.0.0.101 -> 8.8.8.8
+2026-03-19 17:41:04,394 INFO sim.main   x1: 10.0.0.104 -> 10.0.0.103 -> 10.0.0.101 -> 8.8.8.8
+2026-03-19 17:41:04,394 INFO sim.main   x1: 10.0.0.111 -> 10.0.0.110 -> 10.0.0.103 -> 10.0.0.102 -> 10.0.0.101 -> 8.8.8.8
+2026-03-19 17:41:04,394 INFO sim.main   x1: 10.0.0.106 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:41:04,394 INFO sim.main   x1: 10.0.0.101 -> 10.0.0.110 -> 10.0.0.109 -> 10.0.0.106 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:41:04,394 INFO sim.main   x1: 10.0.0.107 -> 10.0.0.105 -> 10.0.0.101 -> 10.0.0.112 -> 8.8.8.8
+2026-03-19 17:41:04,394 INFO sim.main   x1: 10.0.0.103 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.108 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 17:41:04,395 INFO sim.main   x1: 10.0.0.109 -> 10.0.0.101 -> 10.0.0.105 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:41:04,395 INFO sim.main   x1: 10.0.0.110 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.106 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:48:55,734 INFO sim.main =====================================================
+2026-03-19 17:48:55,735 INFO sim.main 🧪 E2E Simulation: DS + SAR + simulated SOR cluster
+2026-03-19 17:48:55,735 INFO sim.main =====================================================
+2026-03-19 17:48:55,735 INFO sim.main [cfg] etcd=http://127.0.0.1:2379  ds=127.0.0.1:50052  sar=8.8.8.8:53
+2026-03-19 17:48:55,735 INFO sim.main [cfg] sors=12  requests=20  req_bw=5
+2026-03-19 17:48:55,735 INFO sim.main [cfg] logs=/home/ubuntu/sorzxy/sdn-obfuscation-network/.smoke (ds.log/sar.log/sor.log/smr.log/sim.log)
+2026-03-19 17:48:55,735 INFO sim.main [step] clearing /network/ prefix
+2026-03-19 17:48:55,757 INFO sim.main [step] starting DS
+2026-03-19 17:48:55,761 INFO sim.main [step] starting SAR register
+2026-03-19 17:48:56,288 INFO sim.main [step] spawning simulated SOR nodes
+2026-03-19 17:48:58,697 INFO sim.main [step] waiting for at least one link to SAR target
+2026-03-19 17:49:00,703 INFO sim.main [step] issuing SMR RequestTunnel calls
+2026-03-19 17:49:00,712 INFO sim.main [req 00] tunnel=40705 first=10.0.0.107:24105 hops=3 path=10.0.0.107 -> 10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:49:01,320 INFO sim.main [req 01] tunnel=41313 first=10.0.0.107:59918 hops=3 path=10.0.0.107 -> 10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:49:01,929 INFO sim.main [req 02] tunnel=41922 first=10.0.0.108:45514 hops=3 path=10.0.0.108 -> 10.0.0.107 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:49:02,545 INFO sim.main [req 03] tunnel=42534 first=10.0.0.106:33505 hops=5 path=10.0.0.106 -> 10.0.0.101 -> 10.0.0.107 -> 10.0.0.103 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:49:03,160 INFO sim.main [req 04] tunnel=43150 first=10.0.0.104:55935 hops=5 path=10.0.0.104 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:49:03,780 INFO sim.main [req 05] tunnel=43770 first=10.0.0.108:46584 hops=5 path=10.0.0.108 -> 10.0.0.103 -> 10.0.0.101 -> 10.0.0.111 -> 10.0.0.109 -> 8.8.8.8
+2026-03-19 17:49:04,405 INFO sim.main [req 06] tunnel=44394 first=10.0.0.111:43226 hops=5 path=10.0.0.111 -> 10.0.0.107 -> 10.0.0.101 -> 10.0.0.109 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:49:05,027 INFO sim.main [req 07] tunnel=45017 first=10.0.0.110:59241 hops=5 path=10.0.0.110 -> 10.0.0.104 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:49:05,641 INFO sim.main [req 08] tunnel=45630 first=10.0.0.102:48952 hops=5 path=10.0.0.102 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.109 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:49:06,254 INFO sim.main [req 09] tunnel=46244 first=10.0.0.102:20936 hops=5 path=10.0.0.102 -> 10.0.0.101 -> 10.0.0.106 -> 10.0.0.105 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:49:06,874 INFO sim.main [req 10] tunnel=46863 first=10.0.0.108:43137 hops=5 path=10.0.0.108 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.111 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:49:07,490 INFO sim.main [req 11] tunnel=47481 first=10.0.0.106:36716 hops=4 path=10.0.0.106 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.110 -> 8.8.8.8
+2026-03-19 17:49:08,103 INFO sim.main [req 12] tunnel=48098 first=10.0.0.107:57747 hops=2 path=10.0.0.107 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:49:08,721 INFO sim.main [req 13] tunnel=48712 first=10.0.0.107:36116 hops=5 path=10.0.0.107 -> 10.0.0.105 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:49:09,344 INFO sim.main [req 14] tunnel=49332 first=10.0.0.109:22165 hops=5 path=10.0.0.109 -> 10.0.0.108 -> 10.0.0.104 -> 10.0.0.101 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:49:09,971 INFO sim.main [req 15] tunnel=49962 first=10.0.0.111:15090 hops=5 path=10.0.0.111 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.106 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:49:10,588 INFO sim.main [req 16] tunnel=50579 first=10.0.0.107:39866 hops=5 path=10.0.0.107 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.108 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:49:11,203 INFO sim.main [req 17] tunnel=51194 first=10.0.0.106:35143 hops=5 path=10.0.0.106 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.107 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:49:11,825 INFO sim.main [req 18] tunnel=51816 first=10.0.0.110:39045 hops=5 path=10.0.0.110 -> 10.0.0.108 -> 10.0.0.101 -> 10.0.0.109 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:49:12,438 INFO sim.main [req 19] tunnel=52429 first=10.0.0.102:48791 hops=5 path=10.0.0.102 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.105 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:49:13,039 INFO sim.main -----------------------------------------------------
+2026-03-19 17:49:13,039 INFO sim.main [summary] hop histogram (edges):
+2026-03-19 17:49:13,039 INFO sim.main   hops=2: 1
+2026-03-19 17:49:13,039 INFO sim.main   hops=3: 3
+2026-03-19 17:49:13,039 INFO sim.main   hops=4: 1
+2026-03-19 17:49:13,039 INFO sim.main   hops=5: 15
+2026-03-19 17:49:13,039 INFO sim.main [summary] unique paths: 19  failures/rejects: 0
+2026-03-19 17:49:13,039 INFO sim.main [summary] top paths:
+2026-03-19 17:49:13,039 INFO sim.main   x2: 10.0.0.107 -> 10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:49:13,039 INFO sim.main   x1: 10.0.0.108 -> 10.0.0.107 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:49:13,039 INFO sim.main   x1: 10.0.0.106 -> 10.0.0.101 -> 10.0.0.107 -> 10.0.0.103 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:49:13,039 INFO sim.main   x1: 10.0.0.104 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:49:13,039 INFO sim.main   x1: 10.0.0.108 -> 10.0.0.103 -> 10.0.0.101 -> 10.0.0.111 -> 10.0.0.109 -> 8.8.8.8
+2026-03-19 17:49:13,039 INFO sim.main   x1: 10.0.0.111 -> 10.0.0.107 -> 10.0.0.101 -> 10.0.0.109 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:49:13,039 INFO sim.main   x1: 10.0.0.110 -> 10.0.0.104 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:49:13,040 INFO sim.main   x1: 10.0.0.102 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.109 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:49:13,040 INFO sim.main   x1: 10.0.0.102 -> 10.0.0.101 -> 10.0.0.106 -> 10.0.0.105 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:49:13,040 INFO sim.main   x1: 10.0.0.108 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.111 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:49:13,172 INFO sim.main =====================================================
+2026-03-19 17:49:13,173 INFO sim.main 🧪 E2E Simulation: DS + SAR + simulated SOR cluster
+2026-03-19 17:49:13,173 INFO sim.main =====================================================
+2026-03-19 17:49:13,173 INFO sim.main [cfg] etcd=http://127.0.0.1:2379  ds=127.0.0.1:50052  sar=8.8.8.8:53
+2026-03-19 17:49:13,173 INFO sim.main [cfg] sors=12  requests=20  req_bw=5
+2026-03-19 17:49:13,173 INFO sim.main [cfg] logs=/home/ubuntu/sorzxy/sdn-obfuscation-network/.smoke (ds.log/sar.log/sor.log/smr.log/sim.log)
+2026-03-19 17:49:13,173 INFO sim.main [step] clearing /network/ prefix
+2026-03-19 17:49:13,195 INFO sim.main [step] starting DS
+2026-03-19 17:49:13,198 INFO sim.main [step] starting SAR register
+2026-03-19 17:49:13,731 INFO sim.main [step] spawning simulated SOR nodes
+2026-03-19 17:49:16,139 INFO sim.main [step] waiting for at least one link to SAR target
+2026-03-19 17:49:18,144 INFO sim.main [step] issuing SMR RequestTunnel calls
+2026-03-19 17:49:18,153 INFO sim.main [req 00] tunnel=58147 first=10.0.0.107:26595 hops=2 path=10.0.0.107 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:49:18,760 INFO sim.main [req 01] tunnel=58756 first=10.0.0.110:12556 hops=2 path=10.0.0.110 -> 10.0.0.108 -> 8.8.8.8
+2026-03-19 17:49:19,373 INFO sim.main [req 02] tunnel=59364 first=10.0.0.110:24002 hops=5 path=10.0.0.110 -> 10.0.0.109 -> 10.0.0.107 -> 10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:49:19,986 INFO sim.main [req 03] tunnel=59980 first=10.0.0.106:55419 hops=2 path=10.0.0.106 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:49:20,601 INFO sim.main [req 04] tunnel=60591 first=10.0.0.104:51102 hops=5 path=10.0.0.104 -> 10.0.0.101 -> 10.0.0.111 -> 10.0.0.107 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:49:21,220 INFO sim.main [req 05] tunnel=61211 first=10.0.0.108:40329 hops=4 path=10.0.0.108 -> 10.0.0.101 -> 10.0.0.109 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:49:21,843 INFO sim.main [req 06] tunnel=61829 first=10.0.0.108:38425 hops=5 path=10.0.0.108 -> 10.0.0.105 -> 10.0.0.103 -> 10.0.0.101 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:49:22,457 INFO sim.main [req 07] tunnel=62447 first=10.0.0.103:34821 hops=4 path=10.0.0.103 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:49:23,070 INFO sim.main [req 08] tunnel=63061 first=10.0.0.102:27574 hops=5 path=10.0.0.102 -> 10.0.0.101 -> 10.0.0.111 -> 10.0.0.108 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:49:23,685 INFO sim.main [req 09] tunnel=63675 first=10.0.0.104:45469 hops=5 path=10.0.0.104 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.107 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:49:24,304 INFO sim.main [req 10] tunnel=64293 first=10.0.0.107:14306 hops=5 path=10.0.0.107 -> 10.0.0.105 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:49:24,920 INFO sim.main [req 11] tunnel=64909 first=10.0.0.104:30175 hops=5 path=10.0.0.104 -> 10.0.0.101 -> 10.0.0.111 -> 10.0.0.109 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 17:49:25,542 INFO sim.main [req 12] tunnel=65530 first=10.0.0.109:48547 hops=5 path=10.0.0.109 -> 10.0.0.104 -> 10.0.0.101 -> 10.0.0.105 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:49:26,158 INFO sim.main [req 13] tunnel=66148 first=10.0.0.105:23012 hops=5 path=10.0.0.105 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.109 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:49:26,772 INFO sim.main [req 14] tunnel=66761 first=10.0.0.102:28383 hops=5 path=10.0.0.102 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.106 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:49:27,388 INFO sim.main [req 15] tunnel=67378 first=10.0.0.106:59758 hops=5 path=10.0.0.106 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.105 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:49:28,002 INFO sim.main [req 16] tunnel=67995 first=10.0.0.106:17775 hops=4 path=10.0.0.106 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:49:28,621 INFO sim.main [req 17] tunnel=68612 first=10.0.0.108:58925 hops=5 path=10.0.0.108 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.111 -> 10.0.0.109 -> 8.8.8.8
+2026-03-19 17:49:29,239 INFO sim.main [req 18] tunnel=69228 first=10.0.0.106:48261 hops=5 path=10.0.0.106 -> 10.0.0.101 -> 10.0.0.111 -> 10.0.0.109 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 17:49:29,855 INFO sim.main [req 19] tunnel=69845 first=10.0.0.106:22697 hops=5 path=10.0.0.106 -> 10.0.0.104 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.109 -> 8.8.8.8
+2026-03-19 17:49:30,456 INFO sim.main -----------------------------------------------------
+2026-03-19 17:49:30,456 INFO sim.main [summary] hop histogram (edges):
+2026-03-19 17:49:30,456 INFO sim.main   hops=2: 3
+2026-03-19 17:49:30,457 INFO sim.main   hops=4: 3
+2026-03-19 17:49:30,457 INFO sim.main   hops=5: 14
+2026-03-19 17:49:30,457 INFO sim.main [summary] unique paths: 20  failures/rejects: 0
+2026-03-19 17:49:30,457 INFO sim.main [summary] top paths:
+2026-03-19 17:49:30,457 INFO sim.main   x1: 10.0.0.107 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:49:30,457 INFO sim.main   x1: 10.0.0.110 -> 10.0.0.108 -> 8.8.8.8
+2026-03-19 17:49:30,457 INFO sim.main   x1: 10.0.0.110 -> 10.0.0.109 -> 10.0.0.107 -> 10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:49:30,457 INFO sim.main   x1: 10.0.0.106 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:49:30,457 INFO sim.main   x1: 10.0.0.104 -> 10.0.0.101 -> 10.0.0.111 -> 10.0.0.107 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:49:30,457 INFO sim.main   x1: 10.0.0.108 -> 10.0.0.101 -> 10.0.0.109 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:49:30,457 INFO sim.main   x1: 10.0.0.108 -> 10.0.0.105 -> 10.0.0.103 -> 10.0.0.101 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:49:30,457 INFO sim.main   x1: 10.0.0.103 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:49:30,457 INFO sim.main   x1: 10.0.0.102 -> 10.0.0.101 -> 10.0.0.111 -> 10.0.0.108 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:49:30,457 INFO sim.main   x1: 10.0.0.104 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.107 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:51:33,153 INFO sim.main =====================================================
+2026-03-19 17:51:33,153 INFO sim.main 🧪 E2E Simulation: DS + SAR + simulated SOR cluster
+2026-03-19 17:51:33,153 INFO sim.main =====================================================
+2026-03-19 17:51:33,153 INFO sim.main [cfg] etcd=http://127.0.0.1:2379  ds=127.0.0.1:50052  sar=8.8.8.8:53
+2026-03-19 17:51:33,153 INFO sim.main [cfg] sors=12  requests=20  req_bw=5
+2026-03-19 17:51:33,153 INFO sim.main [cfg] logs=/home/ubuntu/sorzxy/sdn-obfuscation-network/.smoke (ds.log/sar.log/sor.log/smr.log/sim.log)
+2026-03-19 17:51:33,153 INFO sim.main [step] clearing /network/ prefix
+2026-03-19 17:51:33,180 INFO sim.main [step] starting DS
+2026-03-19 17:51:33,183 INFO sim.main [step] starting SAR register
+2026-03-19 17:51:33,713 INFO sim.main [step] spawning simulated SOR nodes
+2026-03-19 17:51:36,122 INFO sim.main [step] waiting for at least one link to SAR target
+2026-03-19 17:51:36,123 INFO sim.main [step] issuing SMR RequestTunnel calls
+2026-03-19 17:51:36,131 INFO sim.main [req 00] tunnel=96126 first=172.16.0.11:18895 hops=1 path=172.16.0.11 -> 8.8.8.8
+2026-03-19 17:51:36,734 INFO sim.main [req 01] reject: NO_FEASIBLE_PATH | 无合规路径（可能由loss/jitter/delay/bw/hops任一约束触发） | top_rejects(delay=0, jitter=0, loss=0) | constraints(max_loss_rate=0.2, max_jitter_ms=120.0, max_delay_ms=600.0, min_bw_mbps=5.0, min_hops=2, max_hops=6)
+2026-03-19 17:51:37,337 INFO sim.main [req 02] reject: NO_FEASIBLE_PATH | 无合规路径（可能由loss/jitter/delay/bw/hops任一约束触发） | top_rejects(delay=0, jitter=0, loss=0) | constraints(max_loss_rate=0.2, max_jitter_ms=120.0, max_delay_ms=600.0, min_bw_mbps=5.0, min_hops=2, max_hops=6)
+2026-03-19 17:51:37,946 INFO sim.main [req 03] tunnel=97938 first=10.0.0.105:32003 hops=1 path=10.0.0.105 -> 8.8.8.8
+2026-03-19 17:51:38,551 INFO sim.main [req 04] tunnel=98548 first=10.0.0.105:59801 hops=1 path=10.0.0.105 -> 8.8.8.8
+2026-03-19 17:51:39,162 INFO sim.main [req 05] tunnel=99154 first=10.0.0.111:28498 hops=4 path=10.0.0.111 -> 10.0.0.109 -> 10.0.0.108 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:51:39,779 INFO sim.main [req 06] tunnel=99771 first=10.0.0.110:34144 hops=4 path=10.0.0.110 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:51:40,403 INFO sim.main [req 07] tunnel=395 first=10.0.0.111:35851 hops=4 path=10.0.0.111 -> 10.0.0.101 -> 10.0.0.109 -> 10.0.0.108 -> 8.8.8.8
+2026-03-19 17:51:41,028 INFO sim.main [req 08] tunnel=1018 first=10.0.0.111:42176 hops=5 path=10.0.0.111 -> 10.0.0.108 -> 10.0.0.107 -> 10.0.0.104 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:51:41,646 INFO sim.main [req 09] tunnel=1635 first=10.0.0.105:54620 hops=5 path=10.0.0.105 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.111 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:51:42,257 INFO sim.main [req 10] tunnel=2249 first=10.0.0.102:50957 hops=4 path=10.0.0.102 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 17:51:42,871 INFO sim.main [req 11] tunnel=2862 first=10.0.0.104:45559 hops=5 path=10.0.0.104 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.110 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:51:43,487 INFO sim.main [req 12] tunnel=3479 first=10.0.0.108:57180 hops=4 path=10.0.0.108 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:51:44,113 INFO sim.main [req 13] tunnel=4103 first=10.0.0.111:28993 hops=5 path=10.0.0.111 -> 10.0.0.103 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:51:44,719 INFO sim.main [req 14] tunnel=4715 first=172.16.0.11:26064 hops=1 path=172.16.0.11 -> 8.8.8.8
+2026-03-19 17:51:45,334 INFO sim.main [req 15] tunnel=5323 first=10.0.0.102:14441 hops=5 path=10.0.0.102 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.107 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:51:45,957 INFO sim.main [req 16] tunnel=5941 first=10.0.0.105:18595 hops=5 path=10.0.0.105 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.110 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:51:46,583 INFO sim.main [req 17] tunnel=6574 first=10.0.0.112:39051 hops=5 path=10.0.0.112 -> 10.0.0.108 -> 10.0.0.103 -> 10.0.0.101 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:51:47,197 INFO sim.main [req 18] tunnel=7190 first=10.0.0.107:46571 hops=3 path=10.0.0.107 -> 10.0.0.101 -> 10.0.0.110 -> 8.8.8.8
+2026-03-19 17:51:47,823 INFO sim.main [req 19] tunnel=7813 first=10.0.0.112:26681 hops=5 path=10.0.0.112 -> 10.0.0.111 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:51:48,423 INFO sim.main -----------------------------------------------------
+2026-03-19 17:51:48,423 INFO sim.main [summary] hop histogram (edges):
+2026-03-19 17:51:48,423 INFO sim.main   hops=1: 4
+2026-03-19 17:51:48,423 INFO sim.main   hops=3: 1
+2026-03-19 17:51:48,423 INFO sim.main   hops=4: 5
+2026-03-19 17:51:48,423 INFO sim.main   hops=5: 8
+2026-03-19 17:51:48,423 INFO sim.main [summary] unique paths: 16  failures/rejects: 2
+2026-03-19 17:51:48,423 INFO sim.main [summary] top paths:
+2026-03-19 17:51:48,423 INFO sim.main   x2: 172.16.0.11 -> 8.8.8.8
+2026-03-19 17:51:48,424 INFO sim.main   x2: 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:51:48,424 INFO sim.main   x1: 10.0.0.111 -> 10.0.0.109 -> 10.0.0.108 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:51:48,424 INFO sim.main   x1: 10.0.0.110 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:51:48,424 INFO sim.main   x1: 10.0.0.111 -> 10.0.0.101 -> 10.0.0.109 -> 10.0.0.108 -> 8.8.8.8
+2026-03-19 17:51:48,424 INFO sim.main   x1: 10.0.0.111 -> 10.0.0.108 -> 10.0.0.107 -> 10.0.0.104 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:51:48,424 INFO sim.main   x1: 10.0.0.105 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.111 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:51:48,424 INFO sim.main   x1: 10.0.0.102 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 17:51:48,424 INFO sim.main   x1: 10.0.0.104 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.110 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:51:48,424 INFO sim.main   x1: 10.0.0.108 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:51:56,220 INFO sim.main =====================================================
+2026-03-19 17:51:56,220 INFO sim.main 🧪 E2E Simulation: DS + SAR + simulated SOR cluster
+2026-03-19 17:51:56,220 INFO sim.main =====================================================
+2026-03-19 17:51:56,220 INFO sim.main [cfg] etcd=http://127.0.0.1:2379  ds=127.0.0.1:50052  sar=8.8.8.8:53
+2026-03-19 17:51:56,221 INFO sim.main [cfg] sors=12  requests=20  req_bw=5
+2026-03-19 17:51:56,221 INFO sim.main [cfg] logs=/home/ubuntu/sorzxy/sdn-obfuscation-network/.smoke (ds.log/sar.log/sor.log/smr.log/sim.log)
+2026-03-19 17:51:56,221 INFO sim.main [step] clearing /network/ prefix
+2026-03-19 17:51:56,265 INFO sim.main [step] starting DS
+2026-03-19 17:51:56,269 INFO sim.main [step] starting SAR register
+2026-03-19 17:51:56,794 INFO sim.main [step] spawning simulated SOR nodes
+2026-03-19 17:51:59,203 INFO sim.main [step] waiting for at least one link to SAR target
+2026-03-19 17:52:01,207 INFO sim.main [step] issuing SMR RequestTunnel calls
+2026-03-19 17:52:01,215 INFO sim.main [req 00] tunnel=21210 first=10.0.0.106:11280 hops=2 path=10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:01,822 INFO sim.main [req 01] tunnel=21817 first=10.0.0.106:21981 hops=2 path=10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:02,428 INFO sim.main [req 02] tunnel=22424 first=10.0.0.105:28995 hops=1 path=10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:03,045 INFO sim.main [req 03] tunnel=23035 first=10.0.0.107:36416 hops=5 path=10.0.0.107 -> 10.0.0.106 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:03,670 INFO sim.main [req 04] tunnel=23659 first=10.0.0.111:21946 hops=5 path=10.0.0.111 -> 10.0.0.103 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 17:52:04,290 INFO sim.main [req 05] tunnel=24280 first=10.0.0.109:22869 hops=4 path=10.0.0.109 -> 10.0.0.106 -> 10.0.0.105 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:52:04,905 INFO sim.main [req 06] tunnel=24895 first=10.0.0.105:34725 hops=5 path=10.0.0.105 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.109 -> 10.0.0.108 -> 8.8.8.8
+2026-03-19 17:52:05,526 INFO sim.main [req 07] tunnel=25516 first=10.0.0.109:54675 hops=5 path=10.0.0.109 -> 10.0.0.101 -> 10.0.0.106 -> 10.0.0.104 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:52:06,147 INFO sim.main [req 08] tunnel=26137 first=10.0.0.109:21779 hops=5 path=10.0.0.109 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.110 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:52:06,767 INFO sim.main [req 09] tunnel=26757 first=10.0.0.109:25303 hops=5 path=10.0.0.109 -> 10.0.0.104 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:07,393 INFO sim.main [req 10] tunnel=27383 first=10.0.0.112:53841 hops=5 path=10.0.0.112 -> 10.0.0.106 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:08,007 INFO sim.main [req 11] tunnel=27998 first=10.0.0.104:41128 hops=4 path=10.0.0.104 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 17:52:08,620 INFO sim.main [req 12] tunnel=28611 first=10.0.0.102:50022 hops=4 path=10.0.0.102 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:52:09,245 INFO sim.main [req 13] tunnel=29237 first=10.0.0.112:35938 hops=4 path=10.0.0.112 -> 10.0.0.110 -> 10.0.0.108 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:52:09,852 INFO sim.main [req 14] tunnel=29847 first=172.16.0.11:20545 hops=1 path=172.16.0.11 -> 8.8.8.8
+2026-03-19 17:52:10,468 INFO sim.main [req 15] tunnel=30458 first=10.0.0.105:31001 hops=5 path=10.0.0.105 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.111 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:52:11,084 INFO sim.main [req 16] tunnel=31075 first=10.0.0.106:25377 hops=5 path=10.0.0.106 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 17:52:11,707 INFO sim.main [req 17] tunnel=31697 first=10.0.0.110:59812 hops=5 path=10.0.0.110 -> 10.0.0.108 -> 10.0.0.103 -> 10.0.0.101 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:12,329 INFO sim.main [req 18] tunnel=32319 first=10.0.0.110:27604 hops=5 path=10.0.0.110 -> 10.0.0.109 -> 10.0.0.107 -> 10.0.0.101 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:52:12,943 INFO sim.main [req 19] tunnel=32933 first=10.0.0.102:44256 hops=5 path=10.0.0.102 -> 10.0.0.101 -> 10.0.0.107 -> 10.0.0.105 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:52:13,543 INFO sim.main -----------------------------------------------------
+2026-03-19 17:52:13,543 INFO sim.main [summary] hop histogram (edges):
+2026-03-19 17:52:13,543 INFO sim.main   hops=1: 2
+2026-03-19 17:52:13,543 INFO sim.main   hops=2: 2
+2026-03-19 17:52:13,544 INFO sim.main   hops=4: 4
+2026-03-19 17:52:13,544 INFO sim.main   hops=5: 12
+2026-03-19 17:52:13,544 INFO sim.main [summary] unique paths: 19  failures/rejects: 0
+2026-03-19 17:52:13,544 INFO sim.main [summary] top paths:
+2026-03-19 17:52:13,544 INFO sim.main   x2: 10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:13,544 INFO sim.main   x1: 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:13,544 INFO sim.main   x1: 10.0.0.107 -> 10.0.0.106 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:13,544 INFO sim.main   x1: 10.0.0.111 -> 10.0.0.103 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 17:52:13,544 INFO sim.main   x1: 10.0.0.109 -> 10.0.0.106 -> 10.0.0.105 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:52:13,544 INFO sim.main   x1: 10.0.0.105 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.109 -> 10.0.0.108 -> 8.8.8.8
+2026-03-19 17:52:13,544 INFO sim.main   x1: 10.0.0.109 -> 10.0.0.101 -> 10.0.0.106 -> 10.0.0.104 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:52:13,544 INFO sim.main   x1: 10.0.0.109 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.110 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:52:13,544 INFO sim.main   x1: 10.0.0.109 -> 10.0.0.104 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:13,544 INFO sim.main   x1: 10.0.0.112 -> 10.0.0.106 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:13,788 INFO sim.main =====================================================
+2026-03-19 17:52:13,789 INFO sim.main 🧪 E2E Simulation: DS + SAR + simulated SOR cluster
+2026-03-19 17:52:13,789 INFO sim.main =====================================================
+2026-03-19 17:52:13,789 INFO sim.main [cfg] etcd=http://127.0.0.1:2379  ds=127.0.0.1:50052  sar=8.8.8.8:53
+2026-03-19 17:52:13,789 INFO sim.main [cfg] sors=12  requests=20  req_bw=5
+2026-03-19 17:52:13,789 INFO sim.main [cfg] logs=/home/ubuntu/sorzxy/sdn-obfuscation-network/.smoke (ds.log/sar.log/sor.log/smr.log/sim.log)
+2026-03-19 17:52:13,789 INFO sim.main [step] clearing /network/ prefix
+2026-03-19 17:52:13,813 INFO sim.main [step] starting DS
+2026-03-19 17:52:13,818 INFO sim.main [step] starting SAR register
+2026-03-19 17:52:14,349 INFO sim.main [step] spawning simulated SOR nodes
+2026-03-19 17:52:16,758 INFO sim.main [step] waiting for at least one link to SAR target
+2026-03-19 17:52:16,759 INFO sim.main [step] issuing SMR RequestTunnel calls
+2026-03-19 17:52:16,765 INFO sim.main [req 00] tunnel=36762 first=172.16.0.11:54917 hops=1 path=172.16.0.11 -> 8.8.8.8
+2026-03-19 17:52:17,372 INFO sim.main [req 01] tunnel=37367 first=172.16.0.11:12053 hops=1 path=172.16.0.11 -> 8.8.8.8
+2026-03-19 17:52:17,980 INFO sim.main [req 02] tunnel=37974 first=172.16.0.11:49822 hops=1 path=172.16.0.11 -> 8.8.8.8
+2026-03-19 17:52:18,588 INFO sim.main [req 03] tunnel=38582 first=10.0.0.106:40410 hops=2 path=10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:19,194 INFO sim.main [req 04] tunnel=39190 first=10.0.0.106:47314 hops=1 path=10.0.0.106 -> 8.8.8.8
+2026-03-19 17:52:19,805 INFO sim.main [req 05] tunnel=39797 first=10.0.0.111:37770 hops=4 path=10.0.0.111 -> 10.0.0.110 -> 10.0.0.108 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:20,421 INFO sim.main [req 06] tunnel=40411 first=10.0.0.107:46898 hops=4 path=10.0.0.107 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:52:21,037 INFO sim.main [req 07] tunnel=41029 first=10.0.0.101:28182 hops=4 path=10.0.0.101 -> 10.0.0.110 -> 10.0.0.108 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 17:52:21,654 INFO sim.main [req 08] tunnel=41643 first=10.0.0.101:29533 hops=5 path=10.0.0.101 -> 10.0.0.112 -> 10.0.0.107 -> 10.0.0.105 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:52:22,278 INFO sim.main [req 09] tunnel=42268 first=10.0.0.111:16546 hops=5 path=10.0.0.111 -> 10.0.0.109 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:52:22,891 INFO sim.main [req 10] tunnel=42881 first=10.0.0.102:24683 hops=5 path=10.0.0.102 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.108 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:23,506 INFO sim.main [req 11] tunnel=43497 first=10.0.0.101:22700 hops=5 path=10.0.0.101 -> 10.0.0.112 -> 10.0.0.111 -> 10.0.0.104 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:52:24,131 INFO sim.main [req 12] tunnel=44122 first=10.0.0.112:40417 hops=3 path=10.0.0.112 -> 10.0.0.101 -> 172.16.0.11 -> 8.8.8.8
+2026-03-19 17:52:24,744 INFO sim.main [req 13] tunnel=44737 first=10.0.0.106:13526 hops=4 path=10.0.0.106 -> 10.0.0.101 -> 10.0.0.109 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:52:25,357 INFO sim.main [req 14] tunnel=45350 first=10.0.0.106:19841 hops=3 path=10.0.0.106 -> 10.0.0.105 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:52:25,983 INFO sim.main [req 15] tunnel=45975 first=10.0.0.112:22855 hops=4 path=10.0.0.112 -> 10.0.0.101 -> 10.0.0.109 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:52:26,607 INFO sim.main [req 16] tunnel=46599 first=10.0.0.111:36113 hops=4 path=10.0.0.111 -> 10.0.0.101 -> 10.0.0.109 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:52:27,233 INFO sim.main [req 17] tunnel=47223 first=10.0.0.111:44872 hops=5 path=10.0.0.111 -> 10.0.0.106 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:27,846 INFO sim.main [req 18] tunnel=47837 first=10.0.0.103:56950 hops=5 path=10.0.0.103 -> 10.0.0.101 -> 10.0.0.106 -> 10.0.0.105 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:52:28,463 INFO sim.main [req 19] tunnel=48454 first=10.0.0.108:34361 hops=5 path=10.0.0.108 -> 10.0.0.103 -> 10.0.0.101 -> 10.0.0.106 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:52:29,064 INFO sim.main -----------------------------------------------------
+2026-03-19 17:52:29,064 INFO sim.main [summary] hop histogram (edges):
+2026-03-19 17:52:29,064 INFO sim.main   hops=1: 4
+2026-03-19 17:52:29,064 INFO sim.main   hops=2: 1
+2026-03-19 17:52:29,064 INFO sim.main   hops=3: 2
+2026-03-19 17:52:29,064 INFO sim.main   hops=4: 6
+2026-03-19 17:52:29,064 INFO sim.main   hops=5: 7
+2026-03-19 17:52:29,064 INFO sim.main [summary] unique paths: 18  failures/rejects: 0
+2026-03-19 17:52:29,064 INFO sim.main [summary] top paths:
+2026-03-19 17:52:29,064 INFO sim.main   x3: 172.16.0.11 -> 8.8.8.8
+2026-03-19 17:52:29,064 INFO sim.main   x1: 10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:29,064 INFO sim.main   x1: 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:52:29,064 INFO sim.main   x1: 10.0.0.111 -> 10.0.0.110 -> 10.0.0.108 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:29,064 INFO sim.main   x1: 10.0.0.107 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:52:29,064 INFO sim.main   x1: 10.0.0.101 -> 10.0.0.110 -> 10.0.0.108 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 17:52:29,064 INFO sim.main   x1: 10.0.0.101 -> 10.0.0.112 -> 10.0.0.107 -> 10.0.0.105 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:52:29,064 INFO sim.main   x1: 10.0.0.111 -> 10.0.0.109 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:52:29,065 INFO sim.main   x1: 10.0.0.102 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.108 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:52:29,065 INFO sim.main   x1: 10.0.0.101 -> 10.0.0.112 -> 10.0.0.111 -> 10.0.0.104 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:53:59,918 INFO sim.main =====================================================
+2026-03-19 17:53:59,919 INFO sim.main 🧪 E2E Simulation: DS + SAR + simulated SOR cluster
+2026-03-19 17:53:59,919 INFO sim.main =====================================================
+2026-03-19 17:53:59,919 INFO sim.main [cfg] etcd=http://127.0.0.1:2379  ds=127.0.0.1:50052  sar=8.8.8.8:53
+2026-03-19 17:53:59,919 INFO sim.main [cfg] sors=12  requests=20  req_bw=5
+2026-03-19 17:53:59,919 INFO sim.main [cfg] logs=/home/ubuntu/sorzxy/sdn-obfuscation-network/.smoke (ds.log/sar.log/sor.log/smr.log/sim.log)
+2026-03-19 17:53:59,919 INFO sim.main [step] clearing /network/ prefix
+2026-03-19 17:53:59,948 INFO sim.main [step] starting DS
+2026-03-19 17:53:59,951 INFO sim.main [step] starting SAR register
+2026-03-19 17:54:00,481 INFO sim.main [step] spawning simulated SOR nodes
+2026-03-19 17:54:02,889 INFO sim.main [step] waiting for at least one link to SAR target
+2026-03-19 17:54:03,891 INFO sim.main [step] issuing SMR RequestTunnel calls
+2026-03-19 17:54:03,898 INFO sim.main [req 00] tunnel=43894 first=172.16.0.11:24215 hops=1 path=172.16.0.11 -> 8.8.8.8
+2026-03-19 17:54:04,504 INFO sim.main [req 01] tunnel=44500 first=10.0.0.105:52046 hops=1 path=10.0.0.105 -> 8.8.8.8
+2026-03-19 17:54:05,109 INFO sim.main [req 02] tunnel=45106 first=10.0.0.105:42964 hops=1 path=10.0.0.105 -> 8.8.8.8
+2026-03-19 17:54:05,719 INFO sim.main [req 03] tunnel=45712 first=10.0.0.109:49180 hops=4 path=10.0.0.109 -> 10.0.0.108 -> 10.0.0.107 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:54:06,329 INFO sim.main [req 04] tunnel=46323 first=172.16.0.11:40800 hops=1 path=172.16.0.11 -> 8.8.8.8
+2026-03-19 17:54:06,955 INFO sim.main [req 05] tunnel=46941 first=10.0.0.109:23025 hops=5 path=10.0.0.109 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:54:07,573 INFO sim.main [req 06] tunnel=47563 first=10.0.0.106:40505 hops=5 path=10.0.0.106 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.107 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:54:08,188 INFO sim.main [req 07] tunnel=48178 first=10.0.0.104:37630 hops=5 path=10.0.0.104 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.107 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:54:08,803 INFO sim.main [req 08] tunnel=48793 first=10.0.0.104:52886 hops=5 path=10.0.0.104 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:54:09,420 INFO sim.main [req 09] tunnel=49411 first=10.0.0.107:47599 hops=5 path=10.0.0.107 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.104 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:54:10,039 INFO sim.main [req 10] tunnel=50032 first=10.0.0.110:52909 hops=3 path=10.0.0.110 -> 10.0.0.109 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 17:54:10,658 INFO sim.main [req 11] tunnel=50647 first=10.0.0.105:45423 hops=4 path=10.0.0.105 -> 10.0.0.101 -> 10.0.0.111 -> 10.0.0.109 -> 8.8.8.8
+2026-03-19 17:54:11,275 INFO sim.main [req 12] tunnel=51262 first=10.0.0.102:39480 hops=4 path=10.0.0.102 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 17:54:11,898 INFO sim.main [req 13] tunnel=51890 first=10.0.0.111:25641 hops=4 path=10.0.0.111 -> 10.0.0.106 -> 10.0.0.101 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:54:12,517 INFO sim.main [req 14] tunnel=52508 first=10.0.0.107:30466 hops=5 path=10.0.0.107 -> 10.0.0.101 -> 10.0.0.111 -> 10.0.0.110 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:54:13,137 INFO sim.main [req 15] tunnel=53128 first=10.0.0.109:11502 hops=5 path=10.0.0.109 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.106 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:54:13,755 INFO sim.main [req 16] tunnel=53745 first=10.0.0.107:18889 hops=5 path=10.0.0.107 -> 10.0.0.106 -> 10.0.0.101 -> 10.0.0.105 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:54:14,368 INFO sim.main [req 17] tunnel=54359 first=10.0.0.102:52413 hops=5 path=10.0.0.102 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.109 -> 10.0.0.108 -> 8.8.8.8
+2026-03-19 17:54:14,986 INFO sim.main [req 18] tunnel=54977 first=10.0.0.108:13374 hops=5 path=10.0.0.108 -> 10.0.0.101 -> 10.0.0.107 -> 10.0.0.103 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:54:15,611 INFO sim.main [req 19] tunnel=55597 first=10.0.0.109:19931 hops=5 path=10.0.0.109 -> 10.0.0.101 -> 10.0.0.105 -> 10.0.0.103 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 17:54:16,212 INFO sim.main -----------------------------------------------------
+2026-03-19 17:54:16,212 INFO sim.main [summary] hop histogram (edges):
+2026-03-19 17:54:16,212 INFO sim.main   hops=1: 4
+2026-03-19 17:54:16,212 INFO sim.main   hops=3: 1
+2026-03-19 17:54:16,212 INFO sim.main   hops=4: 4
+2026-03-19 17:54:16,212 INFO sim.main   hops=5: 11
+2026-03-19 17:54:16,212 INFO sim.main [summary] unique paths: 18  failures/rejects: 0
+2026-03-19 17:54:16,212 INFO sim.main [summary] top paths:
+2026-03-19 17:54:16,212 INFO sim.main   x2: 172.16.0.11 -> 8.8.8.8
+2026-03-19 17:54:16,212 INFO sim.main   x2: 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:54:16,212 INFO sim.main   x1: 10.0.0.109 -> 10.0.0.108 -> 10.0.0.107 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 17:54:16,212 INFO sim.main   x1: 10.0.0.109 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 17:54:16,212 INFO sim.main   x1: 10.0.0.106 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.107 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 17:54:16,212 INFO sim.main   x1: 10.0.0.104 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.107 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:54:16,212 INFO sim.main   x1: 10.0.0.104 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:54:16,213 INFO sim.main   x1: 10.0.0.107 -> 10.0.0.101 -> 10.0.0.108 -> 10.0.0.104 -> 10.0.0.103 -> 8.8.8.8
+2026-03-19 17:54:16,213 INFO sim.main   x1: 10.0.0.110 -> 10.0.0.109 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 17:54:16,213 INFO sim.main   x1: 10.0.0.105 -> 10.0.0.101 -> 10.0.0.111 -> 10.0.0.109 -> 8.8.8.8
+2026-03-19 17:56:44,094 INFO sim.main =====================================================
+2026-03-19 17:56:44,094 INFO sim.main 🧪 E2E Simulation: DS + SAR + simulated SOR cluster
+2026-03-19 17:56:44,094 INFO sim.main =====================================================
+2026-03-19 17:56:44,094 INFO sim.main [cfg] etcd=http://127.0.0.1:2379  ds=127.0.0.1:50052  sar=8.8.8.8:53
+2026-03-19 17:56:44,095 INFO sim.main [cfg] sors=12  requests=1  req_bw=5
+2026-03-19 17:56:44,095 INFO sim.main [cfg] logs=/home/ubuntu/sorzxy/sdn-obfuscation-network/.smoke (ds.log/sar.log/sor.log/smr.log/sim.log)
+2026-03-19 17:56:44,095 INFO sim.main [step] clearing /network/ prefix
+2026-03-19 17:56:44,119 INFO sim.main [step] starting DS
+2026-03-19 17:56:44,125 INFO sim.main [step] starting SAR register
+2026-03-19 17:56:44,671 INFO sim.main [step] spawning simulated SOR nodes
+2026-03-19 17:56:47,080 INFO sim.main [step] waiting for at least one link to SAR target
+2026-03-19 17:56:49,085 INFO sim.main [step] issuing SMR RequestTunnel calls
+2026-03-19 17:56:49,089 INFO sim.main [req 00] reject: NO_FEASIBLE_PATH | 无合规路径（可能由loss/jitter/delay/bw/hops任一约束触发） | top_rejects(delay=0, jitter=0, loss=0) | constraints(max_loss_rate=0.2, max_jitter_ms=120.0, max_delay_ms=600.0, min_bw_mbps=5.0, min_hops=2, max_hops=6)
+2026-03-19 17:56:49,690 INFO sim.main -----------------------------------------------------
+2026-03-19 17:56:49,690 INFO sim.main [summary] hop histogram (edges):
+2026-03-19 17:56:49,690 INFO sim.main [summary] unique paths: 0  failures/rejects: 1
+2026-03-19 17:59:29,771 INFO sim.main =====================================================
+2026-03-19 17:59:29,772 INFO sim.main 🧪 E2E Simulation: DS + SAR + simulated SOR cluster
+2026-03-19 17:59:29,772 INFO sim.main =====================================================
+2026-03-19 17:59:29,772 INFO sim.main [cfg] etcd=http://127.0.0.1:2379  ds=127.0.0.1:50052  sar=8.8.8.8:53
+2026-03-19 17:59:29,772 INFO sim.main [cfg] sors=12  requests=1  req_bw=5
+2026-03-19 17:59:29,772 INFO sim.main [cfg] logs=/home/ubuntu/sorzxy/sdn-obfuscation-network/.smoke (ds.log/sar.log/sor.log/smr.log/sim.log)
+2026-03-19 17:59:29,772 INFO sim.main [step] clearing /network/ prefix
+2026-03-19 17:59:29,795 INFO sim.main [step] starting DS
+2026-03-19 17:59:29,797 INFO sim.main [step] starting SAR register
+2026-03-19 17:59:30,335 INFO sim.main [step] spawning simulated SOR nodes
+2026-03-19 17:59:32,744 INFO sim.main [step] waiting for at least one link to SAR target
+2026-03-19 17:59:34,749 INFO sim.main [step] issuing SMR RequestTunnel calls
+2026-03-19 17:59:34,753 INFO sim.main [req 00] reject: NO_FEASIBLE_PATH | 无合规路径（可能由loss/jitter/delay/bw/hops任一约束触发） | top_rejects(delay=0, jitter=0, loss=0) | constraints(max_loss_rate=0.2, max_jitter_ms=120.0, max_delay_ms=600.0, min_bw_mbps=5.0, min_hops=2, max_hops=6)
+2026-03-19 17:59:35,354 INFO sim.main -----------------------------------------------------
+2026-03-19 17:59:35,354 INFO sim.main [summary] hop histogram (edges):
+2026-03-19 17:59:35,354 INFO sim.main [summary] unique paths: 0  failures/rejects: 1
+2026-03-19 18:02:08,969 INFO sim.main =====================================================
+2026-03-19 18:02:08,969 INFO sim.main 🧪 E2E Simulation: DS + SAR + simulated SOR cluster
+2026-03-19 18:02:08,969 INFO sim.main =====================================================
+2026-03-19 18:02:08,969 INFO sim.main [cfg] etcd=http://127.0.0.1:2379  ds=127.0.0.1:50052  sar=8.8.8.8:53
+2026-03-19 18:02:08,969 INFO sim.main [cfg] sors=12  requests=20  req_bw=5
+2026-03-19 18:02:08,969 INFO sim.main [cfg] logs=/home/ubuntu/sorzxy/sdn-obfuscation-network/.smoke (ds.log/sar.log/sor.log/smr.log/sim.log)
+2026-03-19 18:02:08,969 INFO sim.main [step] clearing /network/ prefix
+2026-03-19 18:02:08,994 INFO sim.main [step] starting DS
+2026-03-19 18:02:09,000 INFO sim.main [step] starting SAR register
+2026-03-19 18:02:09,545 INFO sim.main [step] spawning simulated SOR nodes
+2026-03-19 18:02:11,954 INFO sim.main [step] waiting for at least one link to SAR target
+2026-03-19 18:02:13,959 INFO sim.main [step] issuing SMR RequestTunnel calls
+2026-03-19 18:02:13,966 INFO sim.main [req 00] tunnel=33961 first=10.0.0.106:37009 hops=2 path=10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 18:02:14,575 INFO sim.main [req 01] tunnel=34568 first=10.0.0.108:28667 hops=3 path=10.0.0.108 -> 10.0.0.107 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 18:02:15,185 INFO sim.main [req 02] tunnel=35178 first=10.0.0.111:13329 hops=3 path=10.0.0.111 -> 10.0.0.108 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 18:02:15,800 INFO sim.main [req 03] tunnel=35791 first=10.0.0.104:43133 hops=5 path=10.0.0.104 -> 10.0.0.103 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 18:02:16,425 INFO sim.main [req 04] tunnel=36416 first=10.0.0.111:52983 hops=5 path=10.0.0.111 -> 10.0.0.107 -> 10.0.0.106 -> 10.0.0.101 -> 10.0.0.110 -> 8.8.8.8
+2026-03-19 18:02:17,039 INFO sim.main [req 05] tunnel=37030 first=10.0.0.104:35287 hops=4 path=10.0.0.104 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 18:02:17,654 INFO sim.main [req 06] tunnel=37647 first=10.0.0.101:24344 hops=3 path=10.0.0.101 -> 10.0.0.107 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 18:02:18,268 INFO sim.main [req 07] tunnel=38259 first=10.0.0.104:52096 hops=5 path=10.0.0.104 -> 10.0.0.101 -> 10.0.0.109 -> 10.0.0.107 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 18:02:18,882 INFO sim.main [req 08] tunnel=38872 first=10.0.0.103:17832 hops=5 path=10.0.0.103 -> 10.0.0.101 -> 10.0.0.111 -> 10.0.0.108 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 18:02:19,502 INFO sim.main [req 09] tunnel=39490 first=10.0.0.101:28906 hops=5 path=10.0.0.101 -> 10.0.0.110 -> 10.0.0.108 -> 10.0.0.107 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 18:02:20,123 INFO sim.main [req 10] tunnel=40107 first=10.0.0.103:50014 hops=5 path=10.0.0.103 -> 10.0.0.101 -> 10.0.0.107 -> 10.0.0.106 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 18:02:20,734 INFO sim.main [req 11] tunnel=40728 first=10.0.0.105:25194 hops=2 path=10.0.0.105 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 18:02:21,355 INFO sim.main [req 12] tunnel=41346 first=10.0.0.110:17544 hops=5 path=10.0.0.110 -> 10.0.0.107 -> 10.0.0.103 -> 10.0.0.101 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 18:02:21,971 INFO sim.main [req 13] tunnel=41960 first=10.0.0.103:40572 hops=5 path=10.0.0.103 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 18:02:22,590 INFO sim.main [req 14] tunnel=42579 first=10.0.0.106:49661 hops=5 path=10.0.0.106 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.110 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 18:02:23,213 INFO sim.main [req 15] tunnel=43203 first=10.0.0.109:28398 hops=4 path=10.0.0.109 -> 10.0.0.108 -> 10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 18:02:23,832 INFO sim.main [req 16] tunnel=43822 first=10.0.0.108:26835 hops=5 path=10.0.0.108 -> 10.0.0.106 -> 10.0.0.105 -> 10.0.0.104 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 18:02:24,445 INFO sim.main [req 17] tunnel=44437 first=10.0.0.104:50161 hops=4 path=10.0.0.104 -> 10.0.0.101 -> 10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 18:02:25,067 INFO sim.main [req 18] tunnel=45058 first=10.0.0.109:32300 hops=4 path=10.0.0.109 -> 10.0.0.106 -> 10.0.0.105 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 18:02:25,674 INFO sim.main [req 19] tunnel=45669 first=172.16.0.11:42466 hops=1 path=172.16.0.11 -> 8.8.8.8
+2026-03-19 18:02:26,274 INFO sim.main -----------------------------------------------------
+2026-03-19 18:02:26,275 INFO sim.main [summary] hop histogram (edges):
+2026-03-19 18:02:26,275 INFO sim.main   hops=1: 1
+2026-03-19 18:02:26,275 INFO sim.main   hops=2: 2
+2026-03-19 18:02:26,275 INFO sim.main   hops=3: 3
+2026-03-19 18:02:26,275 INFO sim.main   hops=4: 4
+2026-03-19 18:02:26,275 INFO sim.main   hops=5: 10
+2026-03-19 18:02:26,275 INFO sim.main [summary] unique paths: 20  failures/rejects: 0
+2026-03-19 18:02:26,275 INFO sim.main [summary] top paths:
+2026-03-19 18:02:26,275 INFO sim.main   x1: 10.0.0.106 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 18:02:26,275 INFO sim.main   x1: 10.0.0.108 -> 10.0.0.107 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 18:02:26,275 INFO sim.main   x1: 10.0.0.111 -> 10.0.0.108 -> 10.0.0.105 -> 8.8.8.8
+2026-03-19 18:02:26,275 INFO sim.main   x1: 10.0.0.104 -> 10.0.0.103 -> 10.0.0.102 -> 10.0.0.101 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 18:02:26,275 INFO sim.main   x1: 10.0.0.111 -> 10.0.0.107 -> 10.0.0.106 -> 10.0.0.101 -> 10.0.0.110 -> 8.8.8.8
+2026-03-19 18:02:26,275 INFO sim.main   x1: 10.0.0.104 -> 10.0.0.101 -> 10.0.0.112 -> 10.0.0.106 -> 8.8.8.8
+2026-03-19 18:02:26,275 INFO sim.main   x1: 10.0.0.101 -> 10.0.0.107 -> 10.0.0.104 -> 8.8.8.8
+2026-03-19 18:02:26,275 INFO sim.main   x1: 10.0.0.104 -> 10.0.0.101 -> 10.0.0.109 -> 10.0.0.107 -> 10.0.0.102 -> 8.8.8.8
+2026-03-19 18:02:26,275 INFO sim.main   x1: 10.0.0.103 -> 10.0.0.101 -> 10.0.0.111 -> 10.0.0.108 -> 10.0.0.107 -> 8.8.8.8
+2026-03-19 18:02:26,275 INFO sim.main   x1: 10.0.0.101 -> 10.0.0.110 -> 10.0.0.108 -> 10.0.0.107 -> 10.0.0.102 -> 8.8.8.8

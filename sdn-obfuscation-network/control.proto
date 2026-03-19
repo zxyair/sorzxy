@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+// 定义目录服务器的控制接口
+service DirectoryServer {
+  // SMR 发起随遇接入请求，申请建立隐匿隧道
+  rpc RequestTunnel (TunnelReq) returns (TunnelResp) {}
+}
+
+// SMR 发出的请求内容
+message TunnelReq {
+  string smr_id = 1;       // 客户端标识
+  string target_sar_ip = 2; // 最终要访问的真实目标 IP (灾备中心 SAR)
+  int32  req_bandwidth = 3; // 申请的带宽 QoS (对应你论文里的需求)
+}
+
+// 目录服务器返回的凭证
+message TunnelResp {
+  bool success = 1;
+  uint32 tunnel_id = 2;      // 全局分配的标签
+  string first_hop_ip = 3;   // SMR 应该连向的第一个 SOR 节点 IP
+  int32 first_hop_port = 4;  // 第一个 SOR 节点开放的暴露端口
+  string message = 5;
+}
