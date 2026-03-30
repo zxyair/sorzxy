@@ -564,3 +564,40 @@
 2026-03-19 18:02:26,275 INFO sim.main   x1: 10.0.0.104 -> 10.0.0.101 -> 10.0.0.109 -> 10.0.0.107 -> 10.0.0.102 -> 8.8.8.8
 2026-03-19 18:02:26,275 INFO sim.main   x1: 10.0.0.103 -> 10.0.0.101 -> 10.0.0.111 -> 10.0.0.108 -> 10.0.0.107 -> 8.8.8.8
 2026-03-19 18:02:26,275 INFO sim.main   x1: 10.0.0.101 -> 10.0.0.110 -> 10.0.0.108 -> 10.0.0.107 -> 10.0.0.102 -> 8.8.8.8
+2026-03-21 10:59:01,102 INFO sim.main =====================================================
+2026-03-21 10:59:01,102 INFO sim.main 🧪 E2E Simulation: DS + SAR + simulated SOR cluster
+2026-03-21 10:59:01,102 INFO sim.main =====================================================
+2026-03-21 10:59:01,102 INFO sim.main [cfg] etcd=http://127.0.0.1:2379  ds=127.0.0.1:50052  sar=8.8.8.8:53
+2026-03-21 10:59:01,102 INFO sim.main [cfg] sors=12  requests=20  req_bw=5
+2026-03-21 10:59:01,102 INFO sim.main [cfg] logs=/home/ubuntu/sorzxy/sdn-obfuscation-network/.smoke (ds.log/sar.log/sor.log/smr.log/sim.log)
+2026-03-21 10:59:01,102 INFO sim.main [step] clearing /network/ prefix
+2026-03-21 10:59:01,126 INFO sim.main [step] starting DS
+2026-03-21 10:59:01,129 INFO sim.main [step] starting SAR register
+2026-03-21 10:59:16,198 INFO sim.main [warn] SAR not visible in etcd yet (continuing)
+2026-03-21 10:59:16,198 INFO sim.main [step] spawning simulated SOR nodes
+2026-03-21 10:59:18,608 INFO sim.main [step] waiting for at least one link to SAR target
+2026-03-21 11:00:08,699 INFO sim.main [fail] no SOR reported UP link to SAR in time; routing may fail
+2026-03-21 11:00:08,699 INFO sim.main [step] issuing SMR RequestTunnel calls
+2026-03-21 11:00:08,701 INFO sim.main [req 00] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:09,302 INFO sim.main [req 01] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:09,903 INFO sim.main [req 02] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:10,504 INFO sim.main [req 03] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:11,105 INFO sim.main [req 04] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:11,706 INFO sim.main [req 05] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:12,307 INFO sim.main [req 06] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:12,908 INFO sim.main [req 07] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:13,510 INFO sim.main [req 08] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:14,111 INFO sim.main [req 09] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:14,712 INFO sim.main [req 10] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:15,313 INFO sim.main [req 11] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:15,914 INFO sim.main [req 12] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:16,516 INFO sim.main [req 13] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:17,116 INFO sim.main [req 14] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:17,718 INFO sim.main [req 15] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:18,319 INFO sim.main [req 16] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:18,920 INFO sim.main [req 17] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:19,521 INFO sim.main [req 18] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:20,122 INFO sim.main [req 19] rpc error: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50052: Failed to connect to remote host: connect: Connection refused (111)
+2026-03-21 11:00:20,723 INFO sim.main -----------------------------------------------------
+2026-03-21 11:00:20,724 INFO sim.main [summary] hop histogram (edges):
+2026-03-21 11:00:20,724 INFO sim.main [summary] unique paths: 0  failures/rejects: 20

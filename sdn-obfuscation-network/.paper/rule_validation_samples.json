@@ -1,0 +1,52 @@
+[
+  {
+    "idx": 1,
+    "ok": true,
+    "lat_ms": 27.48,
+    "req_bw": 81,
+    "tunnel_id": 96624,
+    "first_hop_ip": "43.134.35.70",
+    "first_hop_port": 35858,
+    "msg": "隐匿级联成功！追踪点为 127.0.0.1:48084"
+  },
+  {
+    "idx": 2,
+    "ok": true,
+    "lat_ms": 19.62,
+    "req_bw": 56,
+    "tunnel_id": 96621,
+    "first_hop_ip": "175.178.37.248",
+    "first_hop_port": 49147,
+    "msg": "隐匿级联成功！追踪点为 127.0.0.1:48084"
+  },
+  {
+    "idx": 3,
+    "ok": true,
+    "lat_ms": 94.42,
+    "req_bw": 27,
+    "tunnel_id": 96682,
+    "first_hop_ip": "43.134.35.70",
+    "first_hop_port": 11089,
+    "msg": "隐匿级联成功！追踪点为 127.0.0.1:48084"
+  },
+  {
+    "idx": 4,
+    "ok": true,
+    "lat_ms": 59.1,
+    "req_bw": 90,
+    "tunnel_id": 96630,
+    "first_hop_ip": "146.56.246.51",
+    "first_hop_port": 20727,
+    "msg": "隐匿级联成功！追踪点为 127.0.0.1:48084"
+  },
+  {
+    "idx": 5,
+    "ok": true,
+    "lat_ms": 137.46,
+    "req_bw": 90,
+    "tunnel_id": 96712,
+    "first_hop_ip": "94.191.33.124",
+    "first_hop_port": 26236,
+    "msg": "隐匿级联成功！追踪点为 127.0.0.1:48084"
+  }
+]

@@ -1,0 +1,60 @@
+{
+  "dataset": {
+    "paths_count": 400,
+    "total_node_selections": 711,
+    "unique_nodes_K": 7
+  },
+  "nse": {
+    "NSE_bits": 2.7167763664740705,
+    "NSE_norm": 0.9677352675032819,
+    "K": 7,
+    "normalizer_log2K": 2.807354922057604
+  },
+  "inequality": {
+    "gini": 0.19931685754470574,
+    "top_nodes": [
+      [
+        "175.178.37.248",
+        164
+      ],
+      [
+        "139.155.85.100",
+        131
+      ],
+      [
+        "94.191.33.124",
+        114
+      ],
+      [
+        "146.56.246.51",
+        98
+      ],
+      [
+        "43.134.35.70",
+        85
+      ],
+      [
+        "43.130.0.75",
+        70
+      ],
+      [
+        "43.157.0.33",
+        49
+      ]
+    ]
+  },
+  "figures": {
+    "fig14_node_selection_probability_bar": {
+      "png": "/home/ubuntu/sorzxy/sdn-obfuscation-network/.paper/figures_path/fig14_node_selection_probability_bar.png",
+      "pdf": "/home/ubuntu/sorzxy/sdn-obfuscation-network/.paper/figures_path/fig14_node_selection_probability_bar.pdf"
+    },
+    "fig15_nse_norm_over_time": {
+      "png": "/home/ubuntu/sorzxy/sdn-obfuscation-network/.paper/figures_path/fig15_nse_norm_over_time.png",
+      "pdf": "/home/ubuntu/sorzxy/sdn-obfuscation-network/.paper/figures_path/fig15_nse_norm_over_time.pdf"
+    },
+    "fig16_lorenz_curve_node_selection": {
+      "png": "/home/ubuntu/sorzxy/sdn-obfuscation-network/.paper/figures_path/fig16_lorenz_curve_node_selection.png",
+      "pdf": "/home/ubuntu/sorzxy/sdn-obfuscation-network/.paper/figures_path/fig16_lorenz_curve_node_selection.pdf"
+    }
+  }
+}

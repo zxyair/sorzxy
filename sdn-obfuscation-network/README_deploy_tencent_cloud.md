@@ -74,6 +74,8 @@ Agent 启动后将：
 - 监听 DS 下发的邻居配置和流表规则；
 - 对邻居执行 ping 探测并上报链路 QoS。
 
+提示：`agent.py` 会优先通过公网探测 `https://ifconfig.me/ip` 获取节点公网 IP；如果探测失败，则回退到环境变量 `SOR_IP`（你也可以提前显式设置以避免探测超时）。
+
 #### 6. 启动 SAR 并完成注册
 
 系统中只有一个 SAR 时，确保业务目标侧有逻辑向 etcd 注册，例如写入：
@@ -81,6 +83,15 @@ Agent 启动后将：
 ```text
 /network/sar/<SAR_IP>
 ```
+
+推荐直接启动：
+
+```bash
+python3 sar_register.py
+```
+
+注册端口由 `config/sar_config.json` 中的 `SERVICE_PORT` 决定。
+提示：`sar_register.py` 会优先通过公网探测 `https://ifconfig.me/ip` 获取 SAR 公网 IP；如果探测失败，则回退到环境变量 `SAR_IP`。
 
 DS 会根据该信息感知目标，并在算路时将路径终点指向该 SAR。
 

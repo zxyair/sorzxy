@@ -106,8 +106,8 @@ python sar_register.py
 
 默认会注册：
 
-- `SAR_IP=10.0.0.100`
-- `SERVICE_PORT=8088`
+- `SAR_IP`：优先通过公网探测 `https://ifconfig.me/ip` 获取；失败则回退到环境变量 `SAR_IP`。
+- `SERVICE_PORT`：从 `config/sar_config.json` 读取 `SERVICE_PORT` 字段（也可通过环境变量 `SERVICE_PORT` 覆盖，作为最后兜底）。
 
 ### 3.4 （可选）启动 SMR 请求隧道
 

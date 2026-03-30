@@ -1,6 +1,6 @@
 {
   "etcd": {
-    "host": "127.0.0.1",
+    "host": "175.178.37.248",
     "port": 2379
   },
   "ds": {
@@ -12,17 +12,17 @@
     "discovery_count": 10
   },
   "qos": {
-    "max_voice_delay_ms": 150.0,
+    "max_voice_delay_ms": 250.0,
     "max_jitter_ms": 30.0,
     "max_loss_rate": 0.01,
     "min_bw_mbps": 1.0,
-    "min_hops": 2,
+    "min_hops": 1,
     "max_hops": 5
   },
   "tunnel": {
     "port_min": 10000,
     "port_max": 60000,
-    "rule_ttl_s": 60
+    "rule_ttl_s": 0
   },
   "log_level": "INFO"
 }

@@ -13,6 +13,40 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import networkx as nx
 
+plt.rcParams["font.sans-serif"] = ["Microsoft YaHei", "SimHei", "Arial Unicode MS", "DejaVu Sans"]
+plt.rcParams["axes.unicode_minus"] = False
+
+# debug log path (workspace root)
+_DEBUG_LOG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "debug-00252b.log")
+_DEBUG_FRAME_COUNTER = 0
+
+
+def _workspace_debug_log(hypothesis_id: str, message: str, data: Dict | None = None) -> None:
+    """
+    NDJSON-like single line logs.
+    Keep it minimal: no secrets, no personal data.
+    """
+    global _DEBUG_FRAME_COUNTER
+    payload = {
+        "sessionId": "00252b",
+        "runId": "root_precheck",
+        "hypothesisId": hypothesis_id,
+        "location": "topology_visualizer.py:animate",
+        "message": message,
+        "data": (data or {}),
+        "timestamp": int(time.time() * 1000),
+        "frameCounter": _DEBUG_FRAME_COUNTER,
+    }
+    try:
+        with open(_DEBUG_LOG_PATH, "a", encoding="utf-8") as f:
+            f.write(json.dumps(payload, ensure_ascii=False) + "\n")
+    except Exception:
+        pass
+    try:
+        print(f"[DEBUG_LOG] {hypothesis_id} {message}", flush=True)
+    except Exception:
+        pass
+
 
 # #region agent log
 def _debug_log(hypothesis_id: str, message: str, data: dict | None = None, run_id: str = "pre-fix") -> None:
@@ -36,7 +70,8 @@ def _debug_log(hypothesis_id: str, message: str, data: dict | None = None, run_i
 _debug_log(
     "H_env",
     "process start",
-    {"platform": platform.platform(), "os_name": os.name, "display": os.getenv("DISPLAY"), "backend": mpl.get_backend()},
+    {"platform": platform.platform(), "os_name": os.name, "display": os.getenv(
+        "DISPLAY"), "backend": mpl.get_backend()},
 )
 # #endregion agent log
 
@@ -57,19 +92,42 @@ def _load_json_config_defaults() -> dict:
 
 
 _cfg = _load_json_config_defaults()
-ETCD_HOST = os.getenv("ETCD_HOST") or (_cfg.get("etcd", {}) or {}).get("host") or "127.0.0.1"
-ETCD_PORT = int(os.getenv("ETCD_PORT") or ((_cfg.get("etcd", {}) or {}).get("port") or 2379))
+ETCD_HOST = os.getenv("ETCD_HOST") or (
+    _cfg.get("etcd", {}) or {}).get("host") or "175.178.37.248"
+ETCD_PORT = int(os.getenv("ETCD_PORT") or (
+    (_cfg.get("etcd", {}) or {}).get("port") or 2379))
+ETCD_TIMEOUT_SEC = float(os.getenv("ETCD_TIMEOUT_SEC", "2.0"))
 REFRESH_MS = int(os.getenv("REFRESH_MS", "2000"))
-MAX_EDGE_LABELS = int(os.getenv("MAX_EDGE_LABELS", "40"))  # avoid clutter
-SHOW_EDGE_LABELS = os.getenv("SHOW_EDGE_LABELS", "1") not in ("0", "false", "False")
+# Avoid missing link metrics when the topology has many edges.
+MAX_EDGE_LABELS = int(os.getenv("MAX_EDGE_LABELS", "80"))  # avoid clutter
+SHOW_EDGE_LABELS = os.getenv(
+    "SHOW_EDGE_LABELS", "1") not in ("0", "false", "False")
 HEADLESS_FRAMES = int(os.getenv("HEADLESS_FRAMES", "60"))
 HEADLESS_OUT_DIR = os.getenv("HEADLESS_OUT_DIR", ".topology_frames")
 
-etcd_client = etcd3.client(host=ETCD_HOST, port=ETCD_PORT)
+etcd_client = etcd3.client(host=ETCD_HOST, port=ETCD_PORT, timeout=ETCD_TIMEOUT_SEC)
 
-fig, ax = plt.subplots(figsize=(12, 8))
+LOCATION_ORDER = [
+    ("上海", "49.234.189.78"),
+    ("广州", "175.178.37.248"),
+    ("香港", "43.132.117.183"),
+    ("北京", "101.42.31.78"),
+    ("新加坡", "43.134.35.70"),
+    ("硅谷", "43.130.0.75"),
+    ("成都", "139.155.85.100"),
+    ("法兰克福", "43.157.0.33"),
+    ("重庆", "94.191.33.124"),
+    ("南京", "146.56.246.51"),
+]
+IP_META = {ip: {"location": loc, "ssh": f"ssh ubuntu@{ip}"} for (loc, ip) in LOCATION_ORDER}
+
+# topology (full canvas)
+fig = plt.figure(figsize=(14, 8), dpi=120)
+gs = fig.add_gridspec(1, 1)
+ax = fig.add_subplot(gs[0, 0])
 try:
-    fig.canvas.manager.set_window_title("SDN Obfuscation Network - Topology Visualizer")
+    fig.canvas.manager.set_window_title(
+        "SDN Obfuscation Network - Topology Visualizer")
 except Exception:
     pass
 
@@ -82,7 +140,9 @@ def _fetch_sar_set() -> Set[str]:
         for _value, meta in etcd_client.get_prefix("/network/sar/"):
             key = meta.key.decode("utf-8")
             sars.add(key.split("/")[-1])
-    except Exception:
+    except Exception as e:
+        if _DEBUG_FRAME_COUNTER <= 3:
+            _workspace_debug_log("H_block_sar", "sar_set_fetch_failed", {"error": str(e)})
         return sars
     return sars
 
@@ -102,10 +162,12 @@ def fetch_graph_from_etcd() -> nx.DiGraph:
 
     try:
         events = etcd_client.get_prefix("/network/status/")
+        status_rows = []
         for value, meta in events:
             key = meta.key.decode("utf-8")
             node_ip = key.split("/")[-1]
             data = json.loads(value.decode("utf-8"))
+            status_rows.append((node_ip, data))
 
             node_status = data.get("node_status", {}) or {}
             cpu_usage = float(node_status.get("cpu_percent", 0.0) or 0.0)
@@ -116,9 +178,13 @@ def fetch_graph_from_etcd() -> nx.DiGraph:
                 kind=("sar" if node_ip in sar_set else "sor"),
                 cpu=cpu_usage,
                 overloaded=is_overloaded,
-                city=(str(city) if city is not None and str(city).strip() != "" else None),
+                city=(str(city) if city is not None and str(
+                    city).strip() != "" else None),
             )
 
+        # Second pass: only draw edges towards nodes that have a status key (or SAR).
+        status_nodes = set(g.nodes())
+        for node_ip, data in status_rows:
             links = data.get("links", {}) or {}
             for neighbor_ip, link_info in links.items():
                 if not isinstance(link_info, dict):
@@ -134,14 +200,12 @@ def fetch_graph_from_etcd() -> nx.DiGraph:
                 jitter = float(link_info.get("jitter", 0.0) or 0.0)
                 loss = float(link_info.get("loss", 0.0) or 0.0)
 
-                if not g.has_node(neighbor_ip):
-                    g.add_node(
-                        neighbor_ip,
-                        kind=("sar" if neighbor_ip in sar_set else "sor"),
-                        cpu=0.0,
-                        overloaded=False,
-                    )
-                g.add_edge(node_ip, neighbor_ip, delay=delay, bw=bw, jitter=jitter, loss=loss)
+                # Avoid drawing \"ghost nodes\" that have no /network/status/<ip>.
+                # Only keep edges towards status-reported nodes or SAR targets.
+                if neighbor_ip not in status_nodes and neighbor_ip not in sar_set:
+                    continue
+                g.add_edge(node_ip, neighbor_ip, delay=delay,
+                           bw=bw, jitter=jitter, loss=loss)
 
         # Ensure SAR nodes appear even if they have no status reports.
         for sar_ip in sar_set:
@@ -150,26 +214,34 @@ def fetch_graph_from_etcd() -> nx.DiGraph:
 
     except Exception as e:
         ax.clear()
-        ax.text(0.5, 0.5, f"Failed to fetch etcd data: {e}", ha="center", va="center")
+        ax.text(
+            0.5, 0.5, f"Failed to fetch etcd data: {e}", ha="center", va="center")
         return nx.DiGraph()
 
     return g
 
 
 def animate(_frame: int) -> None:
-    global global_pos
+    global global_pos, _DEBUG_FRAME_COUNTER
+    _DEBUG_FRAME_COUNTER += 1
+
     ax.clear()
 
     g = fetch_graph_from_etcd()
+
     if g.number_of_nodes() == 0:
-        ax.set_title(f"Waiting for nodes... (etcd={ETCD_HOST}:{ETCD_PORT})", fontsize=15, color="gray")
+        ax.set_title(
+            f"Waiting for nodes... (etcd={ETCD_HOST}:{ETCD_PORT})", fontsize=15, color="gray"
+        )
         ax.axis("off")
+        _workspace_debug_log("H_fetch_empty", "no_nodes_rendered")
         return
 
     # stable spring layout
     # networkx spring_layout expects non-empty 'pos' coordinates if provided.
     if global_pos:
-        global_pos = nx.spring_layout(g, pos=global_pos, k=1.2, iterations=25, seed=7)
+        global_pos = nx.spring_layout(
+            g, pos=global_pos, k=1.2, iterations=25, seed=7)
     else:
         global_pos = nx.spring_layout(g, k=1.2, iterations=25, seed=7)
 
@@ -212,9 +284,11 @@ def animate(_frame: int) -> None:
         vmin = max(1.0, min(delays))
         vmax = max(vmin + 1.0, max(delays))
         norm = mpl.colors.Normalize(vmin=vmin, vmax=vmax)
-        cmap = mpl.colormaps.get_cmap("RdYlGn_r")  # low delay green, high delay red
+        # low delay green, high delay red
+        cmap = mpl.colormaps.get_cmap("RdYlGn_r")
         edge_colors = [cmap(norm(d)) for d in delays]
-        widths = [1.4 + min(3.0, max(0.0, (1.0 - (d - vmin) / (vmax - vmin)) * 3.0)) for d in delays]
+        widths = [
+            1.4 + min(3.0, max(0.0, (1.0 - (d - vmin) / (vmax - vmin)) * 3.0)) for d in delays]
     else:
         edge_colors = "#666666"
         widths = 1.8
@@ -233,7 +307,8 @@ def animate(_frame: int) -> None:
     # Precompute per-node avg outgoing delay for display.
     avg_out_delay: Dict[str, float] = {}
     for n in g.nodes():
-        out_delays = [float(g.edges[n, v].get("delay", 0.0) or 0.0) for v in g.successors(n)]
+        out_delays = [float(g.edges[n, v].get("delay", 0.0) or 0.0)
+                      for v in g.successors(n)]
         if out_delays:
             avg_out_delay[n] = sum(out_delays) / float(len(out_delays))
 
@@ -242,15 +317,20 @@ def animate(_frame: int) -> None:
         kind = d.get("kind", "sor")
         cpu = float(d.get("cpu", 0.0) or 0.0)
         city = d.get("city")
+        loc = IP_META.get(n, {}).get("location") or city
         avg_delay = avg_out_delay.get(n)
         if kind == "sar":
-            labels[n] = f"SAR\n{n}"
+            labels[n] = f"{loc}\nSAR\n{n}" if loc else f"SAR\n{n}"
         else:
-            city_line = f"{city}" if city else ""
+            city_line = f"{loc}" if loc else ""
             delay_line = f"avg {avg_delay:.0f}ms" if avg_delay is not None else ""
             extra = " | ".join([x for x in [city_line, delay_line] if x])
-            labels[n] = f"{n}\nCPU {cpu:.0f}%" + (f"\n{extra}" if extra else "")
-    nx.draw_networkx_labels(g, global_pos, ax=ax, labels=labels, font_size=9, font_weight="bold", font_color="#111111")
+            prefix = f"{loc}\n" if loc else ""
+            labels[n] = prefix + f"{n}\nCPU {cpu:.0f}%"
+            if extra:
+                labels[n] += f"\n{extra}"
+    nx.draw_networkx_labels(g, global_pos, ax=ax, labels=labels,
+                            font_size=9, font_weight="bold", font_color="#111111")
 
     if SHOW_EDGE_LABELS and g.number_of_edges() <= MAX_EDGE_LABELS:
         edge_labels = {}
@@ -259,8 +339,10 @@ def animate(_frame: int) -> None:
             bw = float(ed.get("bw", 0.0) or 0.0)
             jitter = float(ed.get("jitter", 0.0) or 0.0)
             loss = float(ed.get("loss", 0.0) or 0.0)
-            edge_labels[(u, v)] = f"{delay:.0f}ms | {bw:.0f}Mb | j{jitter:.0f} | l{loss:.2f}"
-        nx.draw_networkx_edge_labels(g, global_pos, ax=ax, edge_labels=edge_labels, font_color="#1f7a1f", font_size=8)
+            edge_labels[(
+                u, v)] = f"{delay:.0f}ms | {bw:.0f}Mb | j{jitter:.0f} | l{loss:.2f}"
+        nx.draw_networkx_edge_labels(
+            g, global_pos, ax=ax, edge_labels=edge_labels, font_color="#1f7a1f", font_size=8)
 
     sors = sum(1 for _n, d in g.nodes(data=True) if d.get("kind") != "sar")
     sars = sum(1 for _n, d in g.nodes(data=True) if d.get("kind") == "sar")
@@ -273,13 +355,16 @@ def animate(_frame: int) -> None:
     ax.axis("off")
 
 
-print(f"[*] Topology visualizer starting (etcd={ETCD_HOST}:{ETCD_PORT}, refresh={REFRESH_MS}ms)")
+print(
+    f"[*] Topology visualizer starting (etcd={ETCD_HOST}:{ETCD_PORT}, refresh={REFRESH_MS}ms)")
 
-parser = argparse.ArgumentParser(description="SDN Obfuscation Network topology visualizer (etcd-backed)")
+parser = argparse.ArgumentParser(
+    description="SDN Obfuscation Network topology visualizer (etcd-backed)")
 parser.add_argument("--etcd-host", default=ETCD_HOST)
 parser.add_argument("--etcd-port", type=int, default=ETCD_PORT)
 parser.add_argument("--refresh-ms", type=int, default=REFRESH_MS)
-parser.add_argument("--headless", action="store_true", help="Render frames to PNG instead of opening a window")
+parser.add_argument("--headless", action="store_true",
+                    help="Render frames to PNG instead of opening a window")
 parser.add_argument("--headless-frames", type=int, default=HEADLESS_FRAMES)
 parser.add_argument("--headless-out-dir", default=HEADLESS_OUT_DIR)
 args = parser.parse_args()
@@ -304,14 +389,15 @@ ETCD_PORT = int(args.etcd_port)
 REFRESH_MS = int(args.refresh_ms)
 HEADLESS_FRAMES = int(args.headless_frames)
 HEADLESS_OUT_DIR = str(args.headless_out_dir)
-etcd_client = etcd3.client(host=ETCD_HOST, port=ETCD_PORT)
+etcd_client = etcd3.client(host=ETCD_HOST, port=ETCD_PORT, timeout=ETCD_TIMEOUT_SEC)
 
 _is_windows = os.name == "nt"
 _has_display = _is_windows or bool(os.getenv("DISPLAY"))
 
 if _has_display and not args.headless:
     # Keep a strong reference in a global name to avoid GC warnings.
-    anim = animation.FuncAnimation(fig, animate, interval=REFRESH_MS, cache_frame_data=False)
+    anim = animation.FuncAnimation(
+        fig, animate, interval=REFRESH_MS, cache_frame_data=False)
     plt.tight_layout()
     plt.show()
 else:

@@ -29,6 +29,101 @@ _agent_log(
 )
 #endregion agent log
 
+#region 1afaaa debug logs
+def _dbg_log(hypothesisId, message, data=None, runId="initial"):
+    # NDJSON lines appended for later analysis in debug-1afaaa.log
+    payload = {
+        "sessionId": "1afaaa",
+        "runId": runId,
+        "hypothesisId": hypothesisId,
+        "location": "ds_server.py:bootstrap",
+        "message": message,
+        "data": data or {},
+        "timestamp": int(_agent_time.time() * 1000),
+    }
+    try:
+        with open("/home/ubuntu/sorzxy/.cursor/debug-1afaaa.log", "a", encoding="utf-8") as f:
+            f.write(_agent_json.dumps(payload, ensure_ascii=False) + "\n")
+    except Exception:
+        pass
+
+#region agent log
+def _dbg4639_log(hypothesisId, message, data=None, runId="pre-fix"):
+    try:
+        payload = {
+            "sessionId": "4639ae",
+            "runId": runId,
+            "hypothesisId": hypothesisId,
+            "location": "ds_server.py:runtime",
+            "message": message,
+            "data": data or {},
+            "timestamp": int(_agent_time.time() * 1000),
+        }
+        with open("/home/ubuntu/sorzxy/.cursor/debug-4639ae.log", "a", encoding="utf-8") as f:
+            f.write(_agent_json.dumps(payload, ensure_ascii=False) + "\n")
+    except Exception:
+        pass
+#endregion agent log
+
+
+#region H_env log
+_dbg_log(
+    "H_env",
+    "python runtime details",
+    {
+        "executable": _agent_sys.executable,
+        "version": _agent_sys.version.splitlines()[0],
+        "prefix": _agent_sys.prefix,
+        "base_prefix": getattr(_agent_sys, "base_prefix", None),
+        "cwd": _agent_os.getcwd(),
+        "argv0": (_agent_sys.argv[0] if _agent_sys.argv else None),
+    },
+    runId="initial",
+)
+#endregion H_env log
+
+#region H_protobuf log
+try:
+    import google.protobuf.internal as _gpi  # noqa: F401
+
+    _dbg_log(
+        "H_protobuf",
+        "protobuf internal import ok",
+        {},
+        runId="initial",
+    )
+except Exception as e:
+    _dbg_log(
+        "H_protobuf",
+        "protobuf internal import failed",
+        {"errorType": type(e).__name__, "error": str(e)},
+        runId="initial",
+    )
+#endregion H_protobuf log
+
+#region H_shadow_google log
+try:
+    import google as _google
+
+    _dbg_log(
+        "H_shadow_google",
+        "google namespace resolved",
+        {
+            "google_file": getattr(_google, "__file__", None),
+            "google_path": list(getattr(_google, "__path__", [])),
+        },
+        runId="initial",
+    )
+except Exception as e:
+    _dbg_log(
+        "H_shadow_google",
+        "google import failed",
+        {"errorType": type(e).__name__, "error": str(e)},
+        runId="initial",
+    )
+#endregion H_shadow_google log
+#endregion 1afaaa debug logs
+
 import grpc
 import os
 try:
@@ -40,6 +135,14 @@ except Exception as e:
     #region agent log
     _agent_log("H_deps", "import etcd3 failed", {"errorType": type(e).__name__, "error": str(e)})
     #endregion agent log
+    #region 1afaaa H_deps log
+    _dbg_log(
+        "H_deps",
+        "import etcd3 failed (bootstrap)",
+        {"errorType": type(e).__name__, "error": str(e)},
+        runId="initial",
+    )
+    #endregion 1afaaa H_deps log
     raise
 import json
 import time
@@ -75,16 +178,45 @@ class NeighborManager:
         # 核心数据结构：记录每个节点被指派为探测目标的次数
         self.in_degree_map = {} 
         self.lock = threading.Lock()
+        self._dbg_last_pool_log_ts = 0.0
 
     def get_candidate_pool(self, exclude_ip):
         """获取当前所有在线的可选 SOR 节点"""
         # 从 etcd 的 status 目录获取当前活跃节点
         all_keys = self.etcd.get_prefix(status_prefix())
         nodes = []
+        raw_ips = []
         for _, meta in all_keys:
             ip = meta.key.decode('utf-8').split('/')[-1]
+            raw_ips.append(ip)
             if ip != exclude_ip and ":" not in ip: # 排除自身和带端口的临时实例
                 nodes.append(ip)
+        now = time.time()
+        if now - self._dbg_last_pool_log_ts >= 5.0:
+            self._dbg_last_pool_log_ts = now
+            topo_nodes = []
+            try:
+                te = globals().get("topo_engine")
+                if te is not None:
+                    topo_nodes = list(getattr(te, "graph").nodes)
+            except Exception:
+                topo_nodes = []
+            #region agent log
+            _dbg4639_log(
+                "H_pool_source",
+                "candidate pool built from status prefix",
+                {
+                    "exclude_ip": exclude_ip,
+                    "status_key_ips_count": len(raw_ips),
+                    "status_key_ips_sample": raw_ips[:20],
+                    "candidate_count": len(nodes),
+                    "candidate_sample": nodes[:20],
+                    "topo_nodes_count": len(topo_nodes),
+                    "topo_nodes_sample": topo_nodes[:20],
+                },
+                runId="pre-fix",
+            )
+            #endregion agent log
         return nodes
 
     def initial_blind_assignment(self, new_node_ip):
@@ -187,6 +319,20 @@ def calculate_cmo_pdfs(graph: nx.DiGraph, source: str, target: str, req_bw: floa
         )
         return None, diag
 
+    # 这里输出“达标隐匿路径集合”，用于调试/验证算路约束与后续选路一致性。
+    max_paths_print = int(os.getenv("MAX_PATHS_PRINT", "20"))
+    print(
+        f"[算法引擎] 此处满足条件的隐匿路径集合（共 {len(valid_obfuscated_paths)} 条，可打印前 {max_paths_print} 条）："
+    )
+    for idx, item in enumerate(valid_obfuscated_paths[:max_paths_print], start=1):
+        p = item.get("path") or []
+        path_str = " -> ".join(str(x) for x in p)
+        delay_ms = float(item.get("delay", 0.0))
+        hop_count = int(item.get("hop_count", 0))
+        print(f"  {idx:02d}) {path_str} | delay={delay_ms:.2f}ms | hops={hop_count}")
+    if len(valid_obfuscated_paths) > max_paths_print:
+        print(f"  ... 已省略 {len(valid_obfuscated_paths) - max_paths_print} 条")
+
     chosen_route = random.choice(valid_obfuscated_paths)
     print(
         f"\n[算法引擎] 🔍 语音 QoS 空间探索完毕，共锁定 {len(valid_obfuscated_paths)} 条达标隐匿路径。"
@@ -220,13 +366,37 @@ class DirectoryServerServicer(control_pb2_grpc.DirectoryServerServicer):
         else:
             smr_endpoint = peer_info
 
-        print(f"\n[DS 控制平面] 📡 接收到 SMR 终端 [{smr_endpoint}] 接入请求 -> 目标: {request.target_sar_ip}")
+        requested_target_sar_ip = getattr(request, "target_sar_ip", "") or ""
+        # SMR 不需要知道 SAR 地址：允许用空 / auto / default_sar 触发 DS 从 etcd 里选唯一 SAR。
+        target_sar_ip = requested_target_sar_ip
+        if requested_target_sar_ip in ("", "auto", "default_sar"):
+            known_sars = []
+            try:
+                for _value, meta in etcd_client.get_prefix(sar_prefix()):
+                    sar_ip = meta.key.decode("utf-8").split("/")[-1]
+                    if sar_ip:
+                        known_sars.append(sar_ip)
+            except Exception as e:
+                payload = {"code": "SAR_RESOLVE_ETCD_ERROR", "message": str(e)}
+                return control_pb2.TunnelResp(success=False, message=json.dumps(payload, ensure_ascii=False))
+
+            if len(known_sars) != 1:
+                payload = {
+                    "code": "SAR_RESOLVE_UNIQUE_REQUIRED",
+                    "message": "当前 etcd 中需要且仅需要注册 1 个 SAR 才能自动选择目标",
+                    "sars": known_sars,
+                }
+                return control_pb2.TunnelResp(success=False, message=json.dumps(payload, ensure_ascii=False))
+
+            target_sar_ip = known_sars[0]
+
+        print(f"\n[DS 控制平面] 📡 接收到 SMR 终端 [{smr_endpoint}] 接入请求 -> 目标: {target_sar_ip}")
         
         # ==========================================
         # 2. 随机盲选入口与临时图挂载 (MVP 方案)
         # ==========================================
         # 从图中获取当前所有存活的 SOR 节点 (排除 SMR 自身和目标 SAR)
-        alive_nodes = [n for n in topo_engine.graph.nodes if ":" not in n and n not in ["SMR", request.target_sar_ip]]
+        alive_nodes = [n for n in topo_engine.graph.nodes if ":" not in n and n not in ["SMR", target_sar_ip]]
         
         if not alive_nodes:
             print("[DS 接入网关] ❌ 全网无存活节点，接入失败！")
@@ -245,7 +415,7 @@ class DirectoryServerServicer(control_pb2_grpc.DirectoryServerServicer):
             work_graph = topo_engine.graph.copy()
             work_graph.add_edge(smr_endpoint, ingress_node, bw=1000.0, delay=10.0)
             # 触发 CMO-PDFS 算路
-            candidate_path, diag = calculate_cmo_pdfs(work_graph, smr_endpoint, request.target_sar_ip, request.req_bandwidth)
+            candidate_path, diag = calculate_cmo_pdfs(work_graph, smr_endpoint, target_sar_ip, request.req_bandwidth)
             last_diag = diag
             if candidate_path:
                 path = candidate_path
@@ -278,7 +448,7 @@ class DirectoryServerServicer(control_pb2_grpc.DirectoryServerServicer):
         # ==========================================
         assigned_tunnel_id = int(time.time() * 1000) % 100000
         # 从 etcd 获取 SAR 注册的端口
-        sar_value, _ = etcd_client.get(sar_key(request.target_sar_ip))
+        sar_value, _ = etcd_client.get(sar_key(target_sar_ip))
         if sar_value:
             sar_meta = json.loads(sar_value.decode('utf-8'))
             target_final_port = sar_meta.get('port', 53)
@@ -388,9 +558,23 @@ def sar_discovery_watcher():
                     config_val, _ = etcd_client.get(neighbor_config_key(sor_ip))
                     neighbors = json.loads(config_val.decode('utf-8')) if config_val else []
 
-                    # 保留原有 SOR 网格邻居（默认约定为 10.*），追加所有 SAR 目标
-                    base_neighbors = [ip for ip in neighbors if ip.startswith("10.")]
-                    new_neighbors = sorted(set(base_neighbors).union(known_sars))
+                    # 保留原有 SOR 邻居（不再假设特定网段前缀），追加所有 SAR 目标
+                    # 否则当 SOR 使用公网 IP 时，会被旧逻辑的 10.* 过滤掉，导致拓扑缺边。
+                    new_neighbors = sorted(set(neighbors).union(known_sars))
+                    #region agent log
+                    _dbg4639_log(
+                        "H_sar_union",
+                        "sar union applied to node neighbors",
+                        {
+                            "sor_ip": sor_ip,
+                            "old_neighbors_count": len(neighbors),
+                            "known_sars_count": len(known_sars),
+                            "new_neighbors_count": len(new_neighbors),
+                            "known_sars": sorted(list(known_sars))[:20],
+                        },
+                        runId="pre-fix",
+                    )
+                    #endregion agent log
                     etcd_client.put(neighbor_config_key(sor_ip), json.dumps(new_neighbors))
                     
         except Exception as e:

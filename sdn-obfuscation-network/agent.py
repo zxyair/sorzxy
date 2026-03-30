@@ -33,9 +33,11 @@ import etcd3
 import json
 import os
 import socket
+import urllib.request
 import subprocess
 import threading
 import time
+from typing import Optional, Tuple
 
 import psutil
 
@@ -75,23 +77,66 @@ def watch_neighbor_config():
                 with NEIGHBOR_LOCK:
                     global DYNAMIC_NEIGHBORS
                     DYNAMIC_NEIGHBORS = new_list
-                print(f"\n[任务更新] 📢 DS 下发了新的探测邻居: {DYNAMIC_NEIGHBORS}")
+                # print(f"\n[任务更新] 📢 DS 下发了新的探测邻居: {DYNAMIC_NEIGHBORS}")
             except Exception as e:
                 print(f"[-] 解析邻居配置失败: {e}")
 
 # ==========================================
 # 2. 修改后的状态感知引擎 (执行模块)
 # =========================================
-def get_host_ip():
+def _fetch_public_ip_ifconfig_me() -> Optional[str]:
+    """
+    优先使用 ifconfig.me 获取公网 IP。
+    """
+    try:
+        with urllib.request.urlopen("https://ifconfig.me/ip", timeout=3) as resp:
+            ip = resp.read().decode("utf-8").strip()
+            return ip if ip else None
+    except Exception as e:
+        return None
+
+
+def _detect_host_ip_udp_fallback() -> Optional[str]:
+    """
+    最后兜底：用 UDP connect 得到本机出接口源地址（可能是私网）。
+    """
+    s = None
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(('8.8.8.8', 80))
-        ip = s.getsockname()[0]
+        s.connect(("8.8.8.8", 80))
+        return s.getsockname()[0]
+    except Exception:
+        return None
     finally:
-        s.close()
-    return ip
+        if s is not None:
+            try:
+                s.close()
+            except Exception:
+                pass
 
-MY_IP = get_host_ip()
+
+def _detect_public_node_ip() -> Tuple[str, str]:
+    """
+    统一公网 IP 探测策略：
+    1) ifconfig.me
+    2) SOR_IP 环境变量
+    3) UDP 源地址兜底
+    """
+    ip = _fetch_public_ip_ifconfig_me()
+    if ip:
+        return ip, "ifconfig.me"
+
+    env_ip = os.getenv("SOR_IP")
+    if env_ip:
+        return env_ip, "env"
+
+    udp_ip = _detect_host_ip_udp_fallback()
+    if udp_ip:
+        return udp_ip, "udp_fallback"
+    return "127.0.0.1", "default"
+
+MY_IP, _my_ip_source = _detect_public_node_ip()
+print(f"[*] SOR public ip resolved: {MY_IP} (source={_my_ip_source})")
 ETCD_CLIENT = etcd3.client(host=settings.etcd_host, port=settings.etcd_port)
 
 _qos_stats = QosWindowStats(window_size=settings.qos_window_size, min_samples=settings.qos_min_samples)
@@ -169,7 +214,13 @@ def run_telemetry_sensor():
             }
             
             # 写入 etcd (作为轻量级内部控制信道)
-            ETCD_CLIENT.put(status_key(MY_IP), json.dumps(report_data))
+            # Attach a short lease so stale status keys auto-expire after agent exit.
+            status_payload = json.dumps(report_data)
+            if int(settings.status_ttl_s) > 0:
+                lease = ETCD_CLIENT.lease(int(settings.status_ttl_s))
+                ETCD_CLIENT.put(status_key(MY_IP), status_payload, lease=lease)
+            else:
+                ETCD_CLIENT.put(status_key(MY_IP), status_payload)
             
             if is_overloaded:
                 print(f"[!] ⚠️ 主动降级告警：节点 {MY_IP} 负载过高 (CPU: {cpu_usage}%, Mem: {mem_usage}%)")

@@ -8,7 +8,7 @@ import control_pb2_grpc
 from common.config import get_settings
 
 
-def request_tunnel(smr_id: str, req_bandwidth: float) -> control_pb2.TunnelResp:
+def request_tunnel(smr_id: str, req_bandwidth: int) -> control_pb2.TunnelResp:
     """
     向目录服务器 DS 发送隧道接入请求，并返回原始响应对象。
     SAR 具体 IP 由 DS 内部根据当前唯一 SAR 或配置确定，这里仅填占位符。
@@ -17,10 +17,10 @@ def request_tunnel(smr_id: str, req_bandwidth: float) -> control_pb2.TunnelResp:
     channel = grpc.insecure_channel(settings.ds_grpc_target)
     stub = control_pb2_grpc.DirectoryServerStub(channel)
 
-    # target_sar_ip 目前对客户端来说是逻辑占位，真实目标由 DS 自行决策
+    # target_sar_ip 由 DS 在服务端根据 etcd 中唯一 SAR 自动决策
     request = control_pb2.TunnelReq(
         smr_id=smr_id,
-        target_sar_ip="default_sar",
+        target_sar_ip="auto",
         req_bandwidth=req_bandwidth,
     )
 
@@ -36,8 +36,9 @@ def main() -> None:
     )
     parser.add_argument(
         "--bandwidth",
-        type=float,
-        default=100.0,
+        # control.proto: TunnelReq.req_bandwidth is int32
+        type=int,
+        default=100,
         help="Requested end-to-end bandwidth in Mbps",
     )
     args = parser.parse_args()
@@ -45,6 +46,7 @@ def main() -> None:
     print("[*] SMR 终端启动，正在向 DS 目录服务器请求隐匿隧道...")
 
     try:
+        # Be explicit: protobuf expects int32, so avoid float like 100.0
         response = request_tunnel(smr_id=args.smr_id, req_bandwidth=args.bandwidth)
     except grpc.RpcError as e:
         print(f"\n[-] 请求失败，DS 未响应: {e.details()}")

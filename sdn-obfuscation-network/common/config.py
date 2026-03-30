@@ -113,6 +113,10 @@ class Settings:
 
     telemetry_interval_s: float = _get_float("TELEMETRY_INTERVAL_S", 3.0)
     ping_timeout_s: int = _get_int("PING_TIMEOUT_S", 1)
+    # Status key TTL (seconds). 0 disables lease-based expiry.
+    status_ttl_s: int = _from_config_or_env("telemetry.status_ttl_s", "STATUS_TTL_S", 10)
+    # DS-side heartbeat timeout for pruning stale nodes from topology.
+    sor_offline_timeout_s: float = _get_float("SOR_OFFLINE_TIMEOUT_S", 3.0)
 
     # --- QoS 约束（集中配置 + 环境变量） ---
     max_voice_delay_ms: float = _from_config_or_env("qos.max_voice_delay_ms", "MAX_VOICE_DELAY_MS", 150.0)
@@ -139,7 +143,7 @@ class Settings:
     port_max: int = _from_config_or_env("tunnel.port_max", "PORT_MAX", 60000)
 
     # Tunnel rule TTL for etcd lease (seconds). 0 disables lease-based expiry.
-    rule_ttl_s: int = _from_config_or_env("tunnel.rule_ttl_s", "RULE_TTL_S", 60)
+    rule_ttl_s: int = _from_config_or_env("tunnel.rule_ttl_s", "RULE_TTL_S", 600)
 
     # 邻居拓扑相关参数（DS 使用）
     neighbor_k: int = _from_config_or_env("neighbor.k", "NEIGHBOR_K", 10)

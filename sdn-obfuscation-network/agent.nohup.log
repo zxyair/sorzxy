@@ -1,0 +1,8 @@
+[*] SOR public ip resolved: 175.178.37.248 (source=ifconfig.me)
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1773999034.180374 3473955 trace.cc:89] Unknown tracer: none
+[*] 配置监听启动：正在等待 DS 分配探测任务于 /network/config/175.178.37.248/neighbors[*] 数据转发平面已就绪，正在 Watch 监听控制信道: /network/rules/175.178.37.248/[*] 状态感知模块已启动，开始周期性监测自身与链路...
+
+
+
+[Agent] 捕获到终止信号，正在清理所有活跃隧道...
